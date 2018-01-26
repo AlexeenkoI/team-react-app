@@ -1,37 +1,87 @@
 import React, { Component } from 'react';
 
+import Modal from 'react-responsive-modal';
+import NavForm from '../forms/navbarform';
+
 class NavBar extends Component{
     constructor(props){
         super(props);
+        this.state = {
+          mMenuActive:'false',
+          open:false
+        };
+
+    }
+
+    activateMenu(){
+      var menu = document.getElementById('bs-example-navbar-collapse-1');
+      var toggleList = document.getElementsByClassName('navbar-right');
+      var open = this.state.mMenuActive;
+      if(open==false){
+        menu.classList.add('in');
+        toggleList[0].classList.remove('slideOutUp');
+        toggleList[0].classList.add('slideInDown');
+        this.setState(prevState=>({
+          mMenuActive : !prevState.mMenuActive
+        }));
+      }else{
+        toggleList[0].classList.remove('slideInDown');
+        toggleList[0].classList.add('slideOutUp');
+        setTimeout(()=>{menu.classList.remove('in');},700);
+        this.setState(prevState=>({
+          mMenuActive : !prevState.mMenuActive
+        }));
+      }
+    }
+    onOpenModal(){
+        //var body = document.getElementsByTagName('body');
+        //body[0].classList.add('no-scroll');
+      this.setState({open:true});
     };
 
+    onCloseModal(){
+        //var body = document.getElementsByTagName('body');
+        //body[0].classList.remove('no-scroll');
+      this.setState({open:false});
+      
+    }
+
+    
+
     render(){
-        
-        return( <nav id="tf-menu" className="navbar navbar-default navbar-fixed-top">
-        <div className="container">
+           
+        return( 
+        <nav id="tf-menu" className="navbar navbar-default navbar-fixed-top animated">
+        <div className="container fadeInDown animated">
           <div className="navbar-header">
-            <button type="button" className="navbar-toggle collapsed">
+            <button type="button" className="navbar-toggle collapsed" onClick={this.activateMenu.bind(this)}>
               <span className="sr-only">Toggle navigation</span>
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="index.html">Spirit8</a>
+            <a className="navbar-brand" href="index.html">Team X</a>
           </div>
   
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul className="nav navbar-nav navbar-right">
-              <li><a href="#tf-home" className="page-scroll">Home</a></li>
-              <li><a href="#tf-about" className="page-scroll">About</a></li>
-              <li><a href="#tf-team" className="page-scroll">Team</a></li>
-              <li><a href="#tf-services" className="page-scroll">Services</a></li>
-              <li><a href="#tf-works" className="page-scroll">Portfolio</a></li>
-              <li><a href="#tf-testimonials" className="page-scroll">Testimonials</a></li>
-              <li><a href="#tf-contact" className="page-scroll">Contact</a></li>
+            <ul className="nav navbar-nav navbar-right slideInDown animated">
+              <li><a href="" className="page-scroll">Что-нибудь</a></li>
+              <li><a href="" className="page-scroll">Что-нибудь</a></li>
+              <li><a href="" className="page-scroll">Что-нибудь</a></li>
+              <li><a href="" className="page-scroll">Что-нибудь</a></li>
+              <li><a href="" className="page-scroll">Что-нибудь</a></li>
+              <li><a href="" className="page-scroll">Что-нибудь</a></li>
+              <li><a  className="page-scroll" onClick={this.onOpenModal.bind(this)}>Написать нам</a></li>
             </ul>
           </div>
         </div>
-      </nav> );
+        <Modal open={this.state.open} onClose={this.onCloseModal.bind(this)} classNames={{overlay:'d-overlay'}}>
+        <div>Обратная связь</div>
+          <NavForm/>
+        </Modal> 
+      </nav>
+
+      );
     }
 }
 

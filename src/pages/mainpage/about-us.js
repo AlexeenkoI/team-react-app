@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import blockImg from '../../img/02.png'
 
 export default class AboutUs extends Component {
     render(){
@@ -7,30 +8,30 @@ export default class AboutUs extends Component {
     <div id="tf-about">
         <div className="container">
             <div className="row">
-                <div className="col-md-6">
-                    <img src="img/02.png" className="img-responsive"/>
+                <div className="col-md-6 zoomIn animated">
+                    <img src={blockImg} className="img-responsive"/>
                 </div>
                 <div className="col-md-6">
                     <div className="about-text">
                         <div className="section-title">
-                            <h4>About us</h4>
-                            <h2>Some words <strong>about us</strong></h2>
+                            <h4 className="lightSpeedIn animated">О нас</h4>
+                            <h2 className="lightSpeedIn animated">Несколько слов <strong>о нас</strong></h2>
                             <hr/>
                             <div className="clearfix"></div>
                         </div>
-                        <p className="intro">We love building and rebuilding brands through our  specific skills. Using colour, fonts, and illustration, we brand companies in a way they will never forget.</p>
+                        <p className="intro bounceIn animated">Мы любим создавать интересные проекты, решать сложные задачи, воплощать в реальность ваши замыслы.</p>
                         <ul className="about-list">
                             <li>
                                 <span className="fa fa-dot-circle-o"></span>
-                                <strong>Mission</strong> - <em>We deliver uniqueness and quality</em>
+                                <strong>Цель</strong> - <em>Хорошее ПО для ваших нужд</em>
                             </li>
                             <li>
                                 <span className="fa fa-dot-circle-o"></span>
-                                <strong>Skills</strong> - <em>Delivering fast and excellent results</em>
+                                <strong>Навыки</strong> - <em>Гарантируем результат</em>
                             </li>
                             <li>
                                 <span className="fa fa-dot-circle-o"></span>
-                                <strong>Clients</strong> - <em>Satisfied clients thanks to our experience</em>
+                                <strong>Коллектив</strong> - <em>Мы молодые специалисты, которые жаждут новых задач</em>
                             </li>
                         </ul>
                     </div>
