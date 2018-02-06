@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import NavBar from './layout/Navbar';
-import TopBlock from './pages/mainpage/top-block';
-import AboutUs from './pages/mainpage/about-us';
-import TeamBlock from './pages/mainpage/team-block';
-import ServicesBlock from './pages/mainpage/services-block';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch
+} from 'react-router-dom';
+
+import Navbar from './layout/Navbar';
+import Main from './components/mainpage/main';
+import MainAdmin from './components/admin/main';
+import MainCabinet from './components/cabinet/main';
 import Footer from './layout/footer';
-//import { Tabs, TabLink, TabContent } from 'react-tabs-redux';
-import Slider from 'react-slick';
 import './App.css';
 import './styles/style.css';
 import './styles/responsive.css';
@@ -22,57 +25,22 @@ class App extends React.Component {
     loading:false
   }
 
-  componentDidMount(){
-    // const ele = document.getElementById('root');
-    // if(ele){
-    //   console.log('ele');
-    //   setTimeout(()=>{
-    //     setTimeout(() => {
-    //       ele.outerHTML = ''
-    //   }, 22000);
-    //   },20000);
-    // }
-
-    setTimeout(() => {
-      setTimeout(()=>{
-
-      },3000)
-    }, 1000);
-  }
   render() {
     const isLoad = this.state.loading;
     
     return (
       <div>
-        <NavBar/>
-        <TopBlock/>
-        <AboutUs/>
-        <TeamBlock/>
-        <ServicesBlock/>
+        <Navbar/>
+          <Route exact path="/" component={Main}/>
+          <Route path="/cabinet" component={MainCabinet}/>
+          
         <Footer/>
-        {/* <div id="team" className="owl-carousel owl-theme row">
-        <SimpleSlider/>
-        </div> */}
+        <Route path="/admin" component={MainAdmin}/>
       </div>
     );
-  
   }
 }
 
-function navBar(){
-  var scrolled = window.pageYOffset;
-  var winHeight = window.innerHeight;
-  var nav = document.getElementsByClassName('navbar-default');
-  if(scrolled>100){
-    nav[0].classList.add('on');
-  }else{
-    nav[0].classList.remove('on');
-  }
-}
 
-window.onscroll = function(){
- navBar();
- 
-}
 
 export default App;

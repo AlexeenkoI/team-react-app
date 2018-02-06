@@ -54,6 +54,9 @@ a:focus{
 	float: left;
 	clear: both;
 }
+.a-link{
+	color:#fcac45 !important;
+}
 .clearfix:after {
      visibility: hidden;
      display: block;
@@ -76,7 +79,8 @@ ul, ol{
 	transition: all 0.8s;
 }
 #tf-menu.navbar-default {
-	background-color: rgba(248, 248, 248, 0);
+	/* background-color: rgba(248, 248, 248, 0); */
+	background-color:black;
 	border-color: rgba(231, 231, 231, 0);
 }
 #tf-menu a.navbar-brand {
@@ -178,6 +182,7 @@ a.fa.fa-angle-down {
 	font-size: 24px;
 	margin-top: 200px;
 	transition: all 0.5s;
+	text-decoration: none;
 }
 a.fa.fa-angle-down:hover{
 	background: #fcac45;
@@ -246,7 +251,7 @@ ul.about-list li span{
 #team{ margin: 0 auto}
 #team .item{
     padding: 0;
-    /* margin: 15px; */
+    margin: 1px;
     color: #FFF;
     text-align: center;
 }

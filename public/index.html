@@ -30,10 +30,19 @@
     </noscript>
     <div id="root" class="preloader"> 
         <style>
+            @media screen and (max-width: 440px) {
+              .preloader {
+                margin-top:200px;
+                line-height: 50px !important;
+                height:100% !important;
+              }
+            }
             .preloader {
-              display: flex;
+              display: block;
               justify-content: center;
               align-items: center;
+              line-height: 100vh;
+              text-align:center;
               height: 100vh;
           
               color: white;

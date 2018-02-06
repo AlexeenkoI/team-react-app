@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  NavLink
+} from 'react-router-dom'
 
 import Modal from 'react-responsive-modal';
 import NavForm from '../forms/navbarform';
@@ -51,8 +57,9 @@ class NavBar extends Component{
     render(){
            
         return( 
+          
         <nav id="tf-menu" className="navbar navbar-default navbar-fixed-top animated">
-        <div className="container fadeInDown animated">
+        <div id="nav-container" className="container fadeInDown animated">
           <div className="navbar-header">
             <button type="button" className="navbar-toggle collapsed" onClick={this.activateMenu.bind(this)}>
               <span className="sr-only">Toggle navigation</span>
@@ -60,29 +67,34 @@ class NavBar extends Component{
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="index.html">Team X</a>
+            
+            <Link to="/"><a className="navbar-brand" href="index.html">Team X</a></Link>
           </div>
   
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right slideInDown animated">
-              <li><a href="" className="page-scroll">Что-нибудь</a></li>
-              <li><a href="" className="page-scroll">Что-нибудь</a></li>
-              <li><a href="" className="page-scroll">Что-нибудь</a></li>
-              <li><a href="" className="page-scroll">Что-нибудь</a></li>
-              <li><a href="" className="page-scroll">Что-нибудь</a></li>
-              <li><a href="" className="page-scroll">Что-нибудь</a></li>
+              <li><NavLink to="/cabinet" className="page-scroll" activeClassName="a-link">Кабинет</NavLink></li>
+              <li><NavLink to="/" className="page-scroll">Что-нибудь</NavLink></li>
+              <li><NavLink to="/" className="page-scroll">Что-нибудь</NavLink></li>
+              <li><NavLink to="/" className="page-scroll">Что-нибудь</NavLink></li>
+              <li><NavLink to="/" className="page-scroll">Что-нибудь</NavLink></li>
+              <li><NavLink to="/" className="page-scroll">Что-нибудь</NavLink></li>
               <li><a  className="page-scroll" onClick={this.onOpenModal.bind(this)}>Написать нам</a></li>
             </ul>
           </div>
         </div>
+        
         <Modal open={this.state.open} onClose={this.onCloseModal.bind(this)} classNames={{overlay:'d-overlay'}}>
         <div>Обратная связь</div>
           <NavForm/>
         </Modal> 
       </nav>
-
+      
       );
     }
 }
-
+window.onload = function(){
+  const container = document.getElementById('nav-container');
+  container.classList.remove('fadeInDown');
+}
 export default NavBar;
