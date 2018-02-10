@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Slider from 'react-slick';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 import tOne from '../../img/team/Igor2.jpg';
 import tTwo from '../../img/team/Miha.jpg';
 import tThree from '../../img/team/Yura.jpg';
@@ -9,14 +11,19 @@ export default class TeamBlock extends Component{
         const settings = {
             dots:false,
             arrows:false,
+            infinite: false,
             slidesToShow:3,
-            infinite: true,
+            slidesToScroll: 1,
+            draggable:false,
             responsive :[
                 { breakpoint: 768, 
                     settings: 
                             { 
-                                slidesToShow: 1 
-                            } 
+                                slidesToShow: 1,
+                                infinite:true,
+                                draggable:true 
+                            },
+                 
                 }
             ]
         }
