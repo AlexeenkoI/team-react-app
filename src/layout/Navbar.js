@@ -12,6 +12,7 @@ import NavForm from '../forms/navbarform';
 class NavBar extends Component{
     constructor(props){
         super(props);
+        this.activateMenu=this.activateMenu.bind(this);
         this.state = {
           mMenuActive:'false',
           open:false
@@ -61,7 +62,7 @@ class NavBar extends Component{
         <nav id="tf-menu" className="navbar navbar-default navbar-fixed-top animated">
         <div id="nav-container" className="container fadeInDown animated">
           <div className="navbar-header">
-            <button type="button" className="navbar-toggle collapsed" onClick={this.activateMenu.bind(this)}>
+            <button type="button" className="navbar-toggle collapsed" onClick={this.activateMenu}>
               <span className="sr-only">Toggle navigation</span>
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
@@ -74,11 +75,12 @@ class NavBar extends Component{
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right slideInDown animated">
               <li><NavLink to="/cabinet" className="page-scroll" activeClassName="a-link">Кабинет</NavLink></li>
+              <li><NavLink to="/admin" className="page-scroll" activeClassName="a-link">Admin</NavLink></li>
+              {/* <li><NavLink to="/" className="page-scroll">Что-нибудь</NavLink></li>
               <li><NavLink to="/" className="page-scroll">Что-нибудь</NavLink></li>
               <li><NavLink to="/" className="page-scroll">Что-нибудь</NavLink></li>
               <li><NavLink to="/" className="page-scroll">Что-нибудь</NavLink></li>
-              <li><NavLink to="/" className="page-scroll">Что-нибудь</NavLink></li>
-              <li><NavLink to="/" className="page-scroll">Что-нибудь</NavLink></li>
+              <li><NavLink to="/" className="page-scroll">Что-нибудь</NavLink></li> */}
               <li><a  className="page-scroll" onClick={this.onOpenModal.bind(this)}>Написать нам</a></li>
             </ul>
           </div>
@@ -94,7 +96,7 @@ class NavBar extends Component{
     }
 }
 window.onload = function(){
-  const container = document.getElementById('nav-container');
-  container.classList.remove('fadeInDown');
+  //const container = document.getElementById('nav-container');
+  //container.classList.remove('fadeInDown');
 }
 export default NavBar;

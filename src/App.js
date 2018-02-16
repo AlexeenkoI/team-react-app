@@ -12,12 +12,11 @@ import MainAdmin from './components/admin/main';
 import MainCabinet from './components/cabinet/main';
 import Footer from './layout/footer';
 import Slider from 'react-slick';
-import './App.css';
-import './styles/style.css';
-import './styles/responsive.css';
-import './styles/bootstrap.css';
-import './styles/animate.css';
-
+// import './App.css';
+// import './styles/style.css';
+// import './styles/responsive.css';
+// import './styles/bootstrap.css';
+// import './styles/animate.css';
 
 
 
@@ -31,12 +30,14 @@ class App extends React.Component {
     
     return (
       <div>
-        <Navbar/>
+        {/* <Navbar/> */}
+        <Switch>
           <Route exact path="/" component={Main}/>
           <Route path="/cabinet" component={MainCabinet}/>
-          
-        <Footer/>
-        <Route path="/admin" component={MainAdmin}/>
+          <Route path="/admin" component={MainAdmin}/>
+        </Switch>
+        {/* <Footer/> */}
+        
       </div>
     );
   }
