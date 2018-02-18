@@ -92,7 +92,7 @@ export default class MainAdmin extends Component{
                   showMenu={this.state.showMenu}
                   />
                   <Route path="/admin" component={DashBoard}/>
-                  <Route path="/admin/main-menu" component={Main}/>
+                  {/* <Route path="/admin/main-menu" component={Main}/> */}
                {/* <DashBoard/> */}
                </div>
         )
