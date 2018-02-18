@@ -88,8 +88,11 @@ export default class MainAdmin extends Component{
                    show={this.state.showMenu}
                    hideNotifications={this.props.closeInfos}
                    />
-                  <Menu showMenu={this.state.showMenu}/>
+                  <Menu 
+                  showMenu={this.state.showMenu}
+                  />
                   <Route path="/admin" component={DashBoard}/>
+                  <Route path="/admin/main-menu" component={Main}/>
                {/* <DashBoard/> */}
                </div>
         )
