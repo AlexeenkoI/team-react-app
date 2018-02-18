@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class SmallStats extends Component{
     render(){
         return(
-            <div className="col-md-4 stats-info widget">
+            <div className="col-md-4 stats-info widget rotateInDownLeft animated">
             <div className="stats-info-agileits">
                 <div className="stats-title">
                     <h4 className="title">Статистика активности клиента</h4>

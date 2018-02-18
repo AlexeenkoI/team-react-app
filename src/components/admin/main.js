@@ -19,10 +19,27 @@ export default class MainAdmin extends Component{
             isLogged:false,
             bottomMenu:true
         }
+        this.props= {
+            closeInfos : false
+        }
+        console.log("main");
+        console.log(this.props);
     }
 
     componentDidMount(){
-        document.body.classList.add('adm-bg');
+         document.body.classList.add('adm-bg');
+        // function clicked(){
+        //     let dropdowns = document.getElementsByClassName('dropdown');
+        //     console.log(dropdowns);
+        //     if(typeof overlay != 'undefined'){
+        //         dropdowns.array.forEach(element => {
+        //             element.classList.remove('open');
+        //         });
+        //     }
+        //     console.log('clicked');
+        // }
+        // document.body.addEventListener('click',clicked,false);
+
     }
 
     tryToLogin=(login,pass)=>{
@@ -32,6 +49,14 @@ export default class MainAdmin extends Component{
             isLogged:true,
             showMenu:true
         });
+
+    }
+    testt=(e)=>{
+        console.log('from main');
+        console.log('click');
+    }
+    componentWillUnmount(){
+        document.body.classList.remove('adm-bg');
 
     }
 
@@ -57,8 +82,12 @@ export default class MainAdmin extends Component{
             )
         }else{
         return(
-               <div>
-                  <Header isShowMenu={this.displayMenu} show={this.state.showMenu}/>
+               <div id="test" onClick={(e)=>this.testt(e)}>
+                  <Header
+                   isShowMenu={this.displayMenu} 
+                   show={this.state.showMenu}
+                   hideNotifications={this.props.closeInfos}
+                   />
                   <Menu showMenu={this.state.showMenu}/>
                   <Route path="/admin" component={DashBoard}/>
                {/* <DashBoard/> */}

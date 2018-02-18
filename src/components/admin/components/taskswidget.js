@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class TaskWidget extends Component{
     render(){
         return(
-            <div className="col-md-8 stats-info stats-last widget-shadow">
+            <div className="col-md-8 stats-info stats-last widget-shadow bounceInRight animated">
 						<div className="stats-last-agile">
 							<table className="table stats-table ">
 								<thead>

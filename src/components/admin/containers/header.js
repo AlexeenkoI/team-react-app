@@ -9,6 +9,8 @@ export default class Header extends Component{
         super(props);
         this.props = props;
         this.isDisplayMenu.bind(this);
+        console.log("header");
+        console.log(this.props.hideNotifications);
     }
     
     isDisplayMenu=(trigger)=>{
@@ -16,11 +18,13 @@ export default class Header extends Component{
     }
     render(){
         return(
-            <header className="header fixed-top clearfix">
+            <header className="header fixed-top clearfix slideInDown animated">
             <Logo isDisplayMenu={this.isDisplayMenu} display={this.props.show}/>
             <div className="nav notify-row" id="top_menu">
                 <ul className="nav top-menu">
-                    <NavBttn/>
+                    <NavBttn
+                    hideTasks={this.props.hideNotifications}
+                    />
                 </ul>
             </div>
             <div className="top-nav clearfix">

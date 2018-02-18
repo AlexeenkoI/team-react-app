@@ -19,7 +19,7 @@ export default class Login extends Component{
     }
     render(){
         return(
-            <div className="log-w3">
+            <div className="log-w3 flipInX animated">
             <div className="w3layouts-main">
                 <h2>Sign In Now</h2>
                     <form onSubmit={this.logging.bind(this)}>
