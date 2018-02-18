@@ -51,10 +51,6 @@ export default class MainAdmin extends Component{
         });
 
     }
-    testt=(e)=>{
-        console.log('from main');
-        console.log('click');
-    }
     componentWillUnmount(){
         document.body.classList.remove('adm-bg');
 
@@ -82,7 +78,7 @@ export default class MainAdmin extends Component{
             )
         }else{
         return(
-               <div id="test" onClick={(e)=>this.testt(e)}>
+               <div id="test">
                   <Header
                    isShowMenu={this.displayMenu} 
                    show={this.state.showMenu}
