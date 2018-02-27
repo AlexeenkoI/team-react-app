@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Collapse } from 'react-bootstrap';
-
+import { Link } from 'react-router-dom';
 
 
 export default class MenuItem extends Component{
@@ -27,7 +27,7 @@ export default class MenuItem extends Component{
                         <div>
                             <ul className="subling">
                                 {sub.map(oneSub=>(
-                                    <li key={oneSub.id}><a>{oneSub.name}</a></li>
+                                    <li key={oneSub.id}><Link to={oneSub.link?oneSub.link:'/admin'}>{oneSub.name}</Link></li>
                                 ))} 
                             </ul>
                         </div>
@@ -39,10 +39,14 @@ export default class MenuItem extends Component{
             return(
                 <div>
                     <li>
-                        <a className="" onClick={() => this.setState({ open: !this.state.open })}>
+                        <Link to={this.props.link ? this.props.link : '/admin'}>
                             <i className="fa fa-dashboard"></i>
                             <span>{this.props.name}</span>
-                        </a> 
+                        </Link>
+                        {/* <a className="" onClick={() => this.setState({ open: !this.state.open })}>
+                            <i className="fa fa-dashboard"></i>
+                            <span>{this.props.name}</span>
+                        </a>  */}
                     </li>
                 </div>
             )

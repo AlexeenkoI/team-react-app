@@ -18,7 +18,7 @@ export default class Header extends Component{
     }
     render(){
         return(
-            <header className="header fixed-top clearfix slideInDown animated">
+            <header className="header fixed-top clearfix ">
             <Logo isDisplayMenu={this.isDisplayMenu} display={this.props.show}/>
             <div className="nav notify-row" id="top_menu">
                 <ul className="nav top-menu">

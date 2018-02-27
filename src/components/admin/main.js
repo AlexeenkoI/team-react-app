@@ -8,6 +8,7 @@ import Header from './containers/header';
 import Menu from './containers/menu';
 import DashBoard from './containers/dashboard';
 import Login from './containers/login';
+import MainSlider from './containers/mainslider';
 
 import '../../styles/admin/styles/style.css';
 import '../../styles/admin/styles/style-responsive.css';
@@ -28,18 +29,6 @@ export default class MainAdmin extends Component{
 
     componentDidMount(){
          document.body.classList.add('adm-bg');
-        // function clicked(){
-        //     let dropdowns = document.getElementsByClassName('dropdown');
-        //     console.log(dropdowns);
-        //     if(typeof overlay != 'undefined'){
-        //         dropdowns.array.forEach(element => {
-        //             element.classList.remove('open');
-        //         });
-        //     }
-        //     console.log('clicked');
-        // }
-        // document.body.addEventListener('click',clicked,false);
-
     }
 
     tryToLogin=(login,pass)=>{
@@ -87,8 +76,8 @@ export default class MainAdmin extends Component{
                   <Menu 
                   showMenu={this.state.showMenu}
                   />
-                  <Route path="/admin" component={DashBoard}/>
-                  {/* <Route path="/admin/main-menu" component={Main}/> */}
+                  <Route exact path="/admin" component={DashBoard}/>
+                  <Route path="/admin/main-slider" component={MainSlider}/>
                {/* <DashBoard/> */}
                </div>
         )

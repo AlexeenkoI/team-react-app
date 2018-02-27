@@ -4,6 +4,7 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 */
+
 h4, h5, h6,
 h1, h2, h3 {margin: 0;}
 ul, ol {margin: 0;}
@@ -23,6 +24,51 @@ body a{
 	-o-transition: 0.5s all ease;
 	-ms-transition: 0.5s all ease;
 	text-decoration:none;
+}
+.modal-backdrop{
+    height:100%;
+}
+.img-preview{
+    height:120px;
+    width:120px;
+    margin-bottom:40px;
+}
+.del-circle{
+    position: absolute;
+    top:0px;
+    right:0px;
+}
+.del-circle>img{
+    opacity: 0;
+     width:35px !important; 
+     transition: 0.70s;
+     -webkit-transition: 0.70s;
+     -moz-transition: 0.70s;
+     -ms-transition: 0.70s;
+     -o-transition: 0.70s;
+    
+}
+.gallery-grid:hover .del-circle>img{
+    opacity:1;
+    width:35px !important;
+    transition: 0.70s;
+    -webkit-transition: 0.70s;
+    -moz-transition: 0.70s;
+    -ms-transition: 0.70s;
+    -o-transition: 0.70s;
+    -webkit-transform: rotate(360deg) scale(1.03);
+    -moz-transform: rotate(360deg) scale(1.03);
+    -o-transform: rotate(360deg) scale(1.03);
+    -ms-transform: rotate(360deg) scale(1.03);
+    transform: rotate(360deg) scale(1.03);
+}
+@media (min-width:768px){
+    .modal-dialog {
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%) !important;
+    } 
 }
 h1,h2,h3,h4,h5,h6{
 	margin:0;			   
@@ -2370,6 +2416,14 @@ ul.inbox-pagination li {
 	text-align:right !important;
 	color: #FF5722 !important;
 }
+.slider-head{
+    text-align: center;
+    margin-bottom: 15px;
+}
+.buttn-head{
+    text-align: center;
+    margin-bottom:15px;
+}
 .gallery-grid img {
     width: 100%;
     cursor: pointer;
@@ -2382,7 +2436,7 @@ ul.inbox-pagination li {
 }
 .gallery-grid{
 	position:relative;
-	overflow: hidden;
+    overflow: hidden;
 }
 .gallery-grid:hover .captn {
     bottom: 12%;
@@ -2528,18 +2582,18 @@ h4 input[type="checkbox"] {
 	font-size:14px;
 }
  /*--placeholder-color--*/
-::-webkit-input-placeholder {
+/* ::-webkit-input-placeholder {
 	color:#fff !important;
 }
-:-moz-placeholder { /* Firefox 18- */
+:-moz-placeholder { 
 	color:#fff !important; 
 }
-::-moz-placeholder {  /* Firefox 19+ */
+::-moz-placeholder {  
 	color:#fff !important;
 }
 :-ms-input-placeholder {  
 	color:#fff !important;
-}
+} */
 /*--//placeholder-color--*/
 .alert {
     margin-bottom: 23px !important;

@@ -41,7 +41,7 @@ export default class LogUser extends Component {
             >
             <a data-toggle="dropdown" className="dropdown-toggle" href="#">
                 <img alt="" src={img}/>
-                <span className="username">John Doe</span>
+                <span className="username">Игорь</span>
                 <b className="caret"></b>
             </a>
             </OverlayTrigger>
