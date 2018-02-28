@@ -13,7 +13,7 @@ export default class Menu extends Component{
                 {id:2,name:'Сайт', cls:'',sub:[
                     {id:1,name:'Меню',link:'/main-menu'},
                     {id:2,name:'Слайдер',link:'/admin/main-slider'},
-                    {id:3,name:'Услуги'}
+                    {id:3,name:'Услуги', link:'/admin/main-services'}
                 ]},
                 {id:3,name:'Что-то еще',cls:'',sub:''}
             ]

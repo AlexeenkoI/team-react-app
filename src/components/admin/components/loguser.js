@@ -23,7 +23,7 @@ export default class LogUser extends Component {
             className += ' open';
         }
         const logOverlay = (
-            <Popover bgClass="" >
+            <Popover id="log-out" >
             <ul className="logout-item">
                 <li><a href="#"><i className=" fa fa-suitcase"></i>Profile</a></li>
                 <li><a href="#"><i className="fa fa-cog"></i> Settings</a></li>
@@ -39,7 +39,7 @@ export default class LogUser extends Component {
             placement="bottom"
             overlay={logOverlay}
             >
-            <a data-toggle="dropdown" className="dropdown-toggle" href="#">
+            <a data-toggle="dropdown" className="dropdown-toggle">
                 <img alt="" src={img}/>
                 <span className="username">Игорь</span>
                 <b className="caret"></b>

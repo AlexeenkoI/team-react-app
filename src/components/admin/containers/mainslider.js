@@ -5,9 +5,11 @@ import Redactsliderform from '../components/redactsliderform';
 import imgOne from '../../../img/team/Miha.jpg';
 import cancelImg from '../../../img/cancel.svg';
 
+
 class MainSlider extends Component{
     constructor(props){
         super(props);
+        console.log('main construct');
         this.state={
             showModal:false,
             sliders:[
@@ -17,13 +19,12 @@ class MainSlider extends Component{
             ],
             editId:null
         }
-    //this.onSlideClick = this.onSlideClick.bind(this);
+    this.onSlideClick = this.onSlideClick.bind(this);
     }
 
     onSlideClick=(id,e)=>{
         e.preventDefault();
-        //console.log(id);
-        this.setState({showModal:true,editId:this.state.sliders[id-1]})
+        this.setState({showModal:true,editId: this.state.sliders.find(slide=>{return slide.id === id})});
     }
     onAddBttnClick=(e)=>{
         e.preventDefault();
@@ -61,25 +62,12 @@ class MainSlider extends Component{
         })
     }
     onDelBttn=(id,e)=>{
-       
-        console.log(id);
-        e.stopPropagation();
-        let newsliders = this.state.sliders.filter(item =>{
+        e.stopPropagation(); //Block parent-up event bubbling
+        this.setState({sliders:this.state.sliders.filter(item =>{
             return item.id !==id;
-        });
-        console.log(newsliders);
-        // this.setState({sliders: this.state.sliders.filter(function(item){
-        //         return item.id!==id
-        //     }
-        // )})
-        //console.log(newState);
-        this.setState({sliders:newsliders});
-        
-        console.log(this.state);
+        })});
     }
     changeData=(data)=>{
-        console.log('parent comp');
-        console.log(data);
         let res;
         let id;
         if(data.id === null){
@@ -92,7 +80,6 @@ class MainSlider extends Component{
                 img : data.imgUrl
             }
             let t = this.addToState(this.state.sliders,res);
-            console.log(t);
             this.setState({sliders:t})
         }else{
             res = this.state.sliders.find(function(slide){
@@ -109,13 +96,6 @@ class MainSlider extends Component{
             });
             let total = this.changeState(res,id);
         }
-
-
-        //console.log(total);
-        // this.setState({
-        //     sliders: total
-        // })
-        //console.log('result filter');
         console.log(this.state.sliders);
     }
     render(){

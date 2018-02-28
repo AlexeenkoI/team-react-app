@@ -9,6 +9,7 @@ import Menu from './containers/menu';
 import DashBoard from './containers/dashboard';
 import Login from './containers/login';
 import MainSlider from './containers/mainslider';
+import Services from './containers/services';
 
 import '../../styles/admin/styles/style.css';
 import '../../styles/admin/styles/style-responsive.css';
@@ -20,9 +21,9 @@ export default class MainAdmin extends Component{
             isLogged:false,
             bottomMenu:true
         }
-        this.props= {
-            closeInfos : false
-        }
+        // this.props= {
+        //     closeInfos : false
+        // }
         console.log("main");
         console.log(this.props);
     }
@@ -78,6 +79,7 @@ export default class MainAdmin extends Component{
                   />
                   <Route exact path="/admin" component={DashBoard}/>
                   <Route path="/admin/main-slider" component={MainSlider}/>
+                  <Route path="/admin/main-services" component={Services}/>
                {/* <DashBoard/> */}
                </div>
         )

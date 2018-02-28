@@ -102,15 +102,15 @@ export default class Redactsliderform extends Component{
                     </div>
                     <div className="form-group">
                         <label >Имя</label>
-                        <input type="text" className="form-control" name="name" id="name" value={this.state.name}  onChange={(e)=>this.onChange(e)}/>
+                        <input type="text" className="form-control" name="name" id="name" value={this.state.name ? this.state.name : ''} placeholder="Имя"  onChange={(e)=>this.onChange(e)}/>
                     </div>
                     <div className="form-group">
                         <label >Должность</label>
-                        <input type="text" className="form-control" name="job" id="job" value={this.state.job} placeholder="Должность" onChange={(e)=>this.onChange(e)}/>
+                        <input type="text" className="form-control" name="job" id="job" value={this.state.job ? this.state.job : ''} placeholder="Должность" onChange={(e)=>this.onChange(e)}/>
                     </div>
                     <div className="form-group">
                         <label >Мини-описание</label>
-                        <input type="text" className="form-control" name="desc" id="desc" value={this.state.desc} placeholder="Описание" onChange={(e)=>this.onChange(e)}/>
+                        <input type="text" className="form-control" name="desc" id="desc" value={this.state.desc ? this.state.desc : ''} placeholder="Описание" onChange={(e)=>this.onChange(e)}/>
                     </div>
                     <button type="submit" className="btn btn-primary">Добавить</button>
                 </form>

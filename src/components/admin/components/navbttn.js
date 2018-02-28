@@ -22,8 +22,8 @@ export default class NavBttn extends Component{
             className += ' open';
         }
         const popoverClick = (
-            <Popover bgClass="" title="1 пропущенное задание">
-                    <a href="#" className="task-item">
+            <Popover id="tasks" title="1 пропущенное задание">
+                    <a  className="task-item">
                         <div className="task-info clearfix">
                             <div className="desc pull-left">
                                 <h5>Закончить верстку</h5>
@@ -35,9 +35,7 @@ export default class NavBttn extends Component{
                         </div>
                     </a>
                 
-                    <a href="#" className="task-item">See All Tasks</a>
-            
-           
+                    <a href="#" className="task-item">See All Tasks</a>     
             </Popover>
         )
         return(

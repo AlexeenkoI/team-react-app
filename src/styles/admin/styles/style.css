@@ -39,6 +39,7 @@ body a{
     right:0px;
 }
 .del-circle>img{
+    visibility: hidden;
     opacity: 0;
      width:35px !important; 
      transition: 0.70s;
@@ -49,7 +50,8 @@ body a{
     
 }
 .gallery-grid:hover .del-circle>img{
-    opacity:1;
+    visibility: visible;
+    opacity: 1;
     width:35px !important;
     transition: 0.70s;
     -webkit-transition: 0.70s;

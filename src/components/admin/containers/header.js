@@ -9,8 +9,8 @@ export default class Header extends Component{
         super(props);
         this.props = props;
         this.isDisplayMenu.bind(this);
-        console.log("header");
-        console.log(this.props.hideNotifications);
+        //console.log("header");
+        //console.log(this.props.hideNotifications);
     }
     
     isDisplayMenu=(trigger)=>{
