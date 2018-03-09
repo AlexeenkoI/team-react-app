@@ -21,23 +21,26 @@ import Slider from 'react-slick';
 
 
 class App extends React.Component {
-  state={
+  constructor(props){
+    super(props);
+  
+  this.state={
     loading:false
   }
-
+  }
   render() {
     const isLoad = this.state.loading;
     
     return (
       <div>
         {/* <Navbar/> */}
-        <Switch>
+
+        <Switch location={this.props.location}>
           <Route exact path="/" component={Main}/>
           <Route path="/cabinet" component={MainCabinet}/>
           <Route path="/admin" component={MainAdmin}/>
         </Switch>
         {/* <Footer/> */}
-        
       </div>
     );
   }

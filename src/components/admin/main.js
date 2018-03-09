@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Route} from 'react-router-dom';
-
+import {Switch,Route} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
@@ -13,6 +12,9 @@ import Services from './containers/services';
 
 import '../../styles/admin/styles/style.css';
 import '../../styles/admin/styles/style-responsive.css';
+
+import { CSSTransition, TransitionGroup, Transition } from 'react-transition-group'
+//import PageTransition from 'react-router-page-transition';
 
 export default class MainAdmin extends Component{
     constructor(props){
@@ -64,7 +66,9 @@ export default class MainAdmin extends Component{
     render(){
         if(!this.state.isLogged){
             return(
+                // <CSSTransition>
                 <Login login={this.tryToLogin}/>
+                // </CSSTransition>
             )
         }else{
         return(
@@ -77,11 +81,23 @@ export default class MainAdmin extends Component{
                   <Menu 
                   showMenu={this.state.showMenu}
                   />
-                  <Route exact path="/admin" component={DashBoard}/>
-                  <Route path="/admin/main-slider" component={MainSlider}/>
-                  <Route path="/admin/main-services" component={Services}/>
-               {/* <DashBoard/> */}
-               </div>
+<TransitionGroup>
+	<CSSTransition
+		key={this.props.location.key}
+		classNames="SlideIn"
+        timeout={{ enter: 600, exit: 0 }}
+        unmountOnExit={true}
+        mountOnEnter={true}
+	>
+                  <Switch >
+                    <Route  exact path="/admin" component={DashBoard}/>
+                    <Route  exact path="/admin/main-slider" component={MainSlider}/>
+                    <Route  exact path="/admin/main-services" component={Services}/>
+                  </Switch>
+                  </CSSTransition>
+</TransitionGroup>
+                </div>
+
         )
         }
     }

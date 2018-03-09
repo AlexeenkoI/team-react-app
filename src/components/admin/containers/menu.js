@@ -11,11 +11,11 @@ export default class Menu extends Component{
             menus:[
                 {id:1,name:'Главная', cls:'active',sub:'',link:'/admin'},
                 {id:2,name:'Сайт', cls:'',sub:[
-                    {id:1,name:'Меню',link:'/main-menu'},
+                    // {id:1,name:'Меню',link:'/main-menu'},
                     {id:2,name:'Слайдер',link:'/admin/main-slider'},
                     {id:3,name:'Услуги', link:'/admin/main-services'}
                 ]},
-                {id:3,name:'Что-то еще',cls:'',sub:''}
+                {id:3,name:'Что-то еще',cls:'',link:'/admin/other',sub:''}
             ]
         }
     }

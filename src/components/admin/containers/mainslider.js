@@ -6,10 +6,13 @@ import imgOne from '../../../img/team/Miha.jpg';
 import cancelImg from '../../../img/cancel.svg';
 
 
+//import { CSSTransitionGroup, Transition } from 'react-transition-group';
+import { CSSTransition, TransitionGroup, Transition } from 'react-transition-group'
+
+
 class MainSlider extends Component{
     constructor(props){
         super(props);
-        console.log('main construct');
         this.state={
             showModal:false,
             sliders:[
@@ -20,6 +23,7 @@ class MainSlider extends Component{
             editId:null
         }
     this.onSlideClick = this.onSlideClick.bind(this);
+    console.log(this.props.location);
     }
 
     onSlideClick=(id,e)=>{
@@ -73,12 +77,13 @@ class MainSlider extends Component{
         if(data.id === null){
 
             res = {
-                id : this.state.sliders.length+1,
+                id : this.state.sliders.length+2,
                 name: data.name,
                 position : data.position,
                 description : data.description,
                 img : data.imgUrl
             }
+            console.log(res);
             let t = this.addToState(this.state.sliders,res);
             this.setState({sliders:t})
         }else{
@@ -100,6 +105,14 @@ class MainSlider extends Component{
     }
     render(){
         return(
+            //  <TransitionGroup>
+            // <CSSTransition 
+            //     timeout={300}
+            //     classNames="SlideIn"    
+            //     mountOnEnter={true}
+            //     unmountOnExit={true}
+            //     appear
+            //     >
             <section id="main-content">
                 <section className="wrapper">
                     <div className="gallery">
@@ -107,12 +120,29 @@ class MainSlider extends Component{
                         <div className="buttn-head"><Button  bsStyle="primary" onClick={(e)=>this.onAddBttnClick(e)}>Добавить изображение</Button></div>
                         <div className="gallery-grids">
                             <div className="gallery-top-grids">
+                                <TransitionGroup>
                                 {this.state.sliders.map(slide=>(
-                                <div key={slide.id} className="col-sm-4 gallery-grids-left">
+                                    <CSSTransition 
+                                     key={slide.id}
+                                    timeout={300}
+                                    mountOnEnter={true}
+                                    unmountOnExit={true}
+                                    onExit={()=>{console.log('exited')}}
+                                    appear={true}
+                                    classNames={{
+                                        appear: 'example-enter',
+                                        appearActive: 'example-enter-active',
+                                        enter: 'example-enter',
+                                        enterActive: 'example-enter-active',
+                                        exit: 'example-leave',
+                                        exitActive: 'example-leave-active',
+                                       }}
+                                    >
+                                <div key={slide.id} className="col-sm-2 gallery-grids-left">
                                     <div className="gallery-grid" onClick={(e)=>this.onSlideClick(slide.id,e)}>
                                         <a className="example-image-link">
                                             <img src={process.env.PUBLIC_URL + slide.img} />
-                                            <div className="captn">
+                                            <div className="captn desktop-only">
                                                 <h4>{slide.name}</h4>
                                                 <p>{slide.position}</p>
                                                 <p>{slide.descripton}</p>
@@ -123,7 +153,10 @@ class MainSlider extends Component{
                                         </a>
                                     </div>
                                 </div>
+                                </CSSTransition>
+                                
                                 ))}
+                                </TransitionGroup>
                                 <div className="clearfix"></div>    
                             </div>
                         </div>
@@ -138,6 +171,9 @@ class MainSlider extends Component{
                 />
                 )}
             </section>
+            //   </CSSTransition>
+            //   </TransitionGroup>
+
         )
     }
 }

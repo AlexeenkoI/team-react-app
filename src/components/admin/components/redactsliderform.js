@@ -8,7 +8,6 @@ import { Eye } from 'react-preloading-component';
 export default class Redactsliderform extends Component{
     constructor(props){
         super(props);
-        console.log('constructor');
         this.state = {
             id : this.props.editItem ? this.props.editItem.id : null,
             isLoading : false,
