@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
+import ScrollAnimation from 'react-animate-on-scroll';
+
 import tOne from '../../img/team/Igor2.jpg';
 import tTwo from '../../img/team/Miha.jpg';
 import tThree from '../../img/team/Yura.jpg';
@@ -32,13 +34,23 @@ export default class TeamBlock extends Component{
         <div className="overlay">
             <div className="container">
                 <div className="section-title center">
+                <ScrollAnimation 
+                    animateIn="fadeIn" 
+                    animateOut="fadeOut"
+                    animateOnce={true}>
                     <h2><strong>Наша команда</strong></h2>
+                </ScrollAnimation>
                     <div className="line">
                         <hr/>
                     </div>
                 </div>
 
                 <div id="team" className="owl-carousel owl-theme row">
+                <ScrollAnimation 
+                    animateIn="zoomIn" 
+                    duration={2}
+                    animateOut="zoomOut"
+                    animateOnce={true}>
                 <Slider {...settings}>
                     <div className="item">
                         <div className="thumbnail">
@@ -73,6 +85,7 @@ export default class TeamBlock extends Component{
                         </div>
                     </div>
                 </Slider>
+                </ScrollAnimation>
                 </div>          
             </div>
         </div>

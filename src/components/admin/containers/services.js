@@ -7,6 +7,8 @@ import cancelImg from '../../../img/cancel.svg';
 import { CSSTransition, TransitionGroup, Transition } from 'react-transition-group'
 import Redactserviceform from '../components/redactserviceform';
 
+import ScrollAnimation from 'react-animate-on-scroll';
+
 export default class Services extends Component{
     constructor(props){
         super(props);
@@ -141,10 +143,10 @@ export default class Services extends Component{
                                     <Button onClick={(e)=>this.onAddBttnClick(e)}> Добавить</Button>
                             </div>
                             <div className="col-md-4">
-                                <Form inline>
+                                {/* <Form inline>
                                 <FormControl type="text" placeholder="Jane Doe" />
                                     <Button>Добавить</Button>
-                                </Form>
+                                </Form> */}
                             </div>
                         </div>
                         <div className="gallery-grids">

@@ -35,7 +35,6 @@ function navBar(){
     var winHeight = window.innerHeight;
     var nav = document.getElementsByClassName('navbar-default');
     if(typeof(nav[0]) != "undefined"){
-        console.log("HERE");
         if(scrolled>100){
             nav[0].classList.add('on');
         }else{

@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
+import { Pulse } from 'react-preloading-component';
 
 
 export default class Login extends Component{
     constructor(props){
         super(props);
         this.props = props;
+        this.state={
+            loginIn:false
+        }
     }
 
     logging=(e)=>{
         e.preventDefault();
+        this.setState({loginIn:true});
         let login = this.admLogin.value;
         let pass = this.admPass.value
-        this.props.login(login,pass);
+        setTimeout(function(){
+            this.props.login(login,pass);
+        }.bind(this),1500)
+        //this.props.login(login,pass);
     }
     render(){
         return(
@@ -24,7 +32,8 @@ export default class Login extends Component{
                         {/* <span><input type="checkbox" />Remember Me</span>
                         <h6><a href="#">Forgot Password?</a></h6> */}
                             <div className="clearfix"></div>
-                            <input type="submit" value="Sign In" name="login"/>
+                    {/* <input type="submit" value={this.state.loginIn ? (<Pulse/>):"Вход"} name="login"/> */}
+                            <button type="submit" className="button-submit" name="login">{this.state.loginIn ? (<Pulse color="white"/>):("Вход")}</button>
                     </form>
                     {/* <p>Don't Have an Account ?<a href="registration.html">Create an account</a></p> */}
             </div>

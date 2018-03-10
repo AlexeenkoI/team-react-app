@@ -2684,7 +2684,7 @@ input.ggg{
 	-moz-transition:0.5s all;
 	-ms-transition:0.5s all;
 }
-.w3layouts-main input[type="submit"] {
+.w3layouts-main input[type="submit"],.button-submit {
     padding: 12px 38px;
     font-size: 18px;
     text-transform: uppercase;
@@ -2702,7 +2702,7 @@ input.ggg{
     -moz-transition: 0.5s all;
     -ms-transition: 0.5s all;
 }
-.w3layouts-main input[type="submit"]:hover {
+.w3layouts-main input[type="submit"]:hover,.button-submit:hover {
 	background:#8b5c7e;
 	transition:0.5s all;
 	-webkit-transition:0.5s all;

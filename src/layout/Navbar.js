@@ -58,9 +58,8 @@ class NavBar extends Component{
     render(){
            
         return( 
-          
-        <nav id="tf-menu" className="navbar navbar-default navbar-fixed-top animated">
-        <div id="nav-container" className="container fadeInDown animated">
+        <nav id="tf-menu" className="navbar navbar-default navbar-fixed-top">
+        <div id="nav-container" className="container ">
           <div className="navbar-header">
             <button type="button" className="navbar-toggle collapsed" onClick={this.activateMenu}>
               <span className="sr-only">Toggle navigation</span>
@@ -76,11 +75,6 @@ class NavBar extends Component{
             <ul className="nav navbar-nav navbar-right slideInDown animated">
               <li><NavLink to="/cabinet" className="page-scroll" activeClassName="a-link">Кабинет</NavLink></li>
               <li><NavLink to="/admin" className="page-scroll" activeClassName="a-link">Admin</NavLink></li>
-              {/* <li><NavLink to="/" className="page-scroll">Что-нибудь</NavLink></li>
-              <li><NavLink to="/" className="page-scroll">Что-нибудь</NavLink></li>
-              <li><NavLink to="/" className="page-scroll">Что-нибудь</NavLink></li>
-              <li><NavLink to="/" className="page-scroll">Что-нибудь</NavLink></li>
-              <li><NavLink to="/" className="page-scroll">Что-нибудь</NavLink></li> */}
               <li><a  className="page-scroll" onClick={this.onOpenModal.bind(this)}>Написать нам</a></li>
             </ul>
           </div>
