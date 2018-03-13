@@ -14,7 +14,7 @@ class NavBar extends Component{
         super(props);
         this.activateMenu=this.activateMenu.bind(this);
         this.state = {
-          mMenuActive:'false',
+          mMenuActive:false,
           open:false
         };
 

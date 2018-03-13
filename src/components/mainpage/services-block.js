@@ -73,7 +73,6 @@ export default class ServicesBlock extends Component{
                     </ScrollAnimation>
                 </div>
                 <div className="space"></div>
-                {/* <Tabs renderActiveTabContentOnly={true}> */}
                 <div className="categories">
                     
                     <ul className="cat">
@@ -88,13 +87,6 @@ export default class ServicesBlock extends Component{
                      animateOut='bounceOutRight'
                      animateOnce={true}>
                         <li className="pull-right">
-                            {/* <ol className="type">
-                                <li onClick={this.onFilterChange('All')}><a  className=""><TabLink to="tab1" default>Все</TabLink></a></li>
-                                <li><a  ><TabLink to="tab2" >Web</TabLink></a></li>
-                                <li><a  ><TabLink to="tab3">Desktop</TabLink></a></li>
-                                <li><a  ><TabLink to="tab4">Mobile</TabLink></a></li>
-                                <li><a  ><TabLink to="tab5">Service</TabLink></a></li>
-                            </ol> */}
                             <ol className="type">
                                 <li onClick={(e)=>this.onFilterChange(e,'All')}><div><a>Все</a></div></li>
                                 {this.state.filters.map(filter=>(
@@ -114,7 +106,7 @@ export default class ServicesBlock extends Component{
                         }).map(service=>(
                             <CSSTransition 
                                 key={service.id}
-                                timeout={300}
+                                timeout={{enter:400,exit:200}}
                                 mountOnEnter={true}
                                 appear={true}
                                 classNames={{
@@ -144,243 +136,7 @@ export default class ServicesBlock extends Component{
                             </CSSTransition>
                         ))}
                     </TransitionGroup>
-                    {/* <TabContent for="tab1">
-                    <div className="col-sm-6 col-md-3 col-lg-3 photography app zoomIn animated">
-                        <div className="portfolio-item">
-                            <div className="hover-bg">
-                                <a href="">
-                                    <div className="hover-text">
-                                        <h4>Мобильная разработка</h4>
-                                        <small>все услуги</small>
-                                        <div className="clearfix"></div>
-                                        <i className="fa fa-plus"></i>
-                                    </div>
-                                    <img src={this.state.imgUrls[1]} className="img-responsive" alt="..."/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-6 col-md-3 col-lg-3 branding zoomIn animated">
-                        <div className="portfolio-item">
-                            <div className="hover-bg">
-                                <a href="">
-                                    <div className="hover-text">
-                                        <h4>Десктопные приложения</h4>
-                                        <small>Создадим десктопные приложения под любую ОС</small>
-                                        <div className="clearfix"></div>
-                                        <i className="fa fa-plus"></i>
-                                    </div>
-                                    <img src={this.state.imgUrls[2]} className="img-responsive" alt="..."/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-6 col-md-3 col-lg-3 branding zoomIn animated">
-                        <div className="portfolio-item">
-                            <div className="hover-bg">
-                                <a href="">
-                                    <div className="hover-text">
-                                        <h4>Создание сервисов</h4>
-                                        <small>создадим мощные сервисы и API под ваши нужды</small>
-                                        <div className="clearfix"></div>
-                                        <i className="fa fa-plus"></i>
-                                    </div>
-                                    <img src={this.state.imgUrls[3]} className="img-responsive" alt="..."/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-6 col-md-3 col-lg-3 web zoomIn animated">
-                        <div className="portfolio-item">
-                            <div className="hover-bg">
-                                <a href="">
-                                    <div className="hover-text">
-                                        <h4>Индивидуальный дизайн</h4>
-                                        <small>Создадим уникальный дизайн</small>
-                                        <div className="clearfix"></div>
-                                        <i className="fa fa-plus"></i>
-                                    </div>
-                                    <img src={this.state.imgUrls[4]} className="img-responsive" alt="..."/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-6 col-md-3 col-lg-3 app zoomIn animated">
-                        <div className="portfolio-item">
-                            <div className="hover-bg">
-                                <a href="">
-                                    <div className="hover-text">
-                                        <h4>Индивидуальный дизайн Мобильного приложения</h4>
-                                        <small>Подберем удобный интерфейс для вашего мобильного решения</small>
-                                        <div className="clearfix"></div>
-                                        <i className="fa fa-plus"></i>
-                                    </div>
-                                    <img src={this.state.imgUrls[5]} className="img-responsive" alt="..."/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-6 col-md-3 col-lg-3 photography web zoomIn animated">
-                        <div className="portfolio-item">
-                            <div className="hover-bg">
-                                <a href="">
-                                    <div className="hover-text">
-                                        <h4>Веб интерфейс</h4>
-                                        <small>Создадим веб-интерфейсы любой сложности</small>
-                                        <div className="clearfix"></div>
-                                        <i className="fa fa-plus"></i>
-                                    </div>
-                                    <img src={this.state.imgUrls[6]} className="img-responsive" alt="..."/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-6 col-md-3 col-lg-3 web zoomIn animated">
-                        <div className="portfolio-item">
-                            <div className="hover-bg">
-                                <a href="">
-                                    <div className="hover-text">
-                                        <h4>Составление Тех Задания</h4>
-                                        <small>составим подробнейшее тз и документацию на проект</small>
-                                        <div className="clearfix"></div>
-                                        <i className="fa fa-plus"></i>
-                                    </div>
-                                    <img src={this.state.imgUrls[7]} className="img-responsive" alt="..."/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    </TabContent>
-                    <TabContent for="tab2">
-                    <div className="col-sm-6 col-md-3 col-lg-3 photography web zoomIn animated">
-                        <div className="portfolio-item">
-                            <div className="hover-bg">
-                                <a href="">
-                                    <div className="hover-text">
-                                        <h4>Веб интерфейс</h4>
-                                        <small>Создадим веб-интерфейсы любой сложности</small>
-                                        <div className="clearfix"></div>
-                                        <i className="fa fa-plus"></i>
-                                    </div>
-                                    <img src={this.state.imgUrls[6]} className="img-responsive" alt="..."/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-6 col-md-3 col-lg-3 web zoomIn animated">
-                        <div className="portfolio-item">
-                            <div className="hover-bg">
-                                <a href="">
-                                    <div className="hover-text">
-                                        <h4>Индивидуальный дизайн</h4>
-                                        <small>Создадим уникальный дизайн</small>
-                                        <div className="clearfix"></div>
-                                        <i className="fa fa-plus"></i>
-                                    </div>
-                                    <img src={this.state.imgUrls[4]} className="img-responsive" alt="..."/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    </TabContent>
-                    <TabContent for="tab3">
-                    <div className="col-sm-6 col-md-3 col-lg-3 branding zoomIn animated">
-                        <div className="portfolio-item">
-                            <div className="hover-bg">
-                                <a href="">
-                                    <div className="hover-text">
-                                        <h4>Десктопные приложения</h4>
-                                        <small>Создадим десктопные приложения под любую ОС</small>
-                                        <div className="clearfix"></div>
-                                        <i className="fa fa-plus"></i>
-                                    </div>
-                                    <img src={this.state.imgUrls[2]} className="img-responsive" alt="..."/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-6 col-md-3 col-lg-3 web zoomIn animated">
-                        <div className="portfolio-item">
-                            <div className="hover-bg">
-                                <a href="">
-                                    <div className="hover-text">
-                                        <h4>Индивидуальный дизайн</h4>
-                                        <small>Создадим уникальный дизайн</small>
-                                        <div className="clearfix"></div>
-                                        <i className="fa fa-plus"></i>
-                                    </div>
-                                    <img src={this.state.imgUrls[4]} className="img-responsive" alt="..."/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    </TabContent>
-                    <TabContent for="tab4">
-                    <div className="col-sm-6 col-md-3 col-lg-3 photography app zoomIn animated">
-                        <div className="portfolio-item">
-                            <div className="hover-bg">
-                                <a href="">
-                                    <div className="hover-text">
-                                        <h4>Мобильная разработка</h4>
-                                        <small>все услуги</small>
-                                        <div className="clearfix"></div>
-                                        <i className="fa fa-plus"></i>
-                                    </div>
-                                    <img src={this.state.imgUrls[1]} className="img-responsive" alt="..."/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-6 col-md-3 col-lg-3 app zoomIn animated">
-                        <div className="portfolio-item">
-                            <div className="hover-bg">
-                                <a href="">
-                                    <div className="hover-text">
-                                        <h4>Индивидуальный дизайн Мобильного приложения</h4>
-                                        <small>Подберем удобный интерфейс для вашего мобильного решения</small>
-                                        <div className="clearfix"></div>
-                                        <i className="fa fa-plus"></i>
-                                    </div>
-                                    <img src={this.state.imgUrls[5]} className="img-responsive" alt="..."/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    </TabContent>
-                    <TabContent for="tab5">
-                    <div className="col-sm-6 col-md-3 col-lg-3 branding zoomIn animated">
-                        <div className="portfolio-item">
-                            <div className="hover-bg">
-                                <a href="">
-                                    <div className="hover-text">
-                                        <h4>Создание сервисов</h4>
-                                        <small>создадим мощные сервисы и API под ваши нужды</small>
-                                        <div className="clearfix"></div>
-                                        <i className="fa fa-plus"></i>
-                                    </div>
-                                    <img src={this.state.imgUrls[3]} className="img-responsive" alt="..."/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-sm-6 col-md-3 col-lg-3 web zoomIn animated">
-                        <div className="portfolio-item">
-                            <div className="hover-bg">
-                                <a href="">
-                                    <div className="hover-text">
-                                        <h4>Составление Тех Задания</h4>
-                                        <small>составим подробнейшее тз и документаци на проект</small>
-                                        <div className="clearfix"></div>
-                                        <i className="fa fa-plus"></i>
-                                    </div>
-                                    <img src={this.state.imgUrls[7]} className="img-responsive" alt="..."/>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    </TabContent> */}
                 </div>
-                {/* </Tabs> */}
             </div>
         </div>
         )

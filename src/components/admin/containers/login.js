@@ -7,19 +7,26 @@ export default class Login extends Component{
         super(props);
         this.props = props;
         this.state={
-            loginIn:false
+            loginIn:false,
+            error:null
         }
     }
 
     logging=(e)=>{
         e.preventDefault();
         this.setState({loginIn:true});
+        const currlogin = 'admin';
+        const currpass = 'mihadomain';
         let login = this.admLogin.value;
         let pass = this.admPass.value
-        setTimeout(function(){
-            this.props.login(login,pass);
-        }.bind(this),1500)
-        //this.props.login(login,pass);
+        if(login.toLowerCase() === currlogin.toLowerCase() && pass.toLowerCase() ===currpass.toLowerCase()){
+            setTimeout(function(){
+                this.props.login(login,pass);
+            }.bind(this),1500)
+            //this.props.login(login,pass);
+        }else{
+            this.setState({loginIn:false,error:true});
+        }
     }
     render(){
         return(
@@ -27,7 +34,7 @@ export default class Login extends Component{
             <div className="w3layouts-main">
                 <h2>Вход</h2>
                     <form onSubmit={this.logging.bind(this)}>
-                        <input type="text" className="ggg" name="Email" placeholder="Логин" ref={(input) => this.admLogin = input} required=""/>
+                        <input type="text" className="ggg" name="Login" placeholder="Логин" ref={(input) => this.admLogin = input} required=""/>
                         <input type="password" className="ggg" name="Password" placeholder="Пароль" ref={(input) => this.admPass = input} required=""/>
                         {/* <span><input type="checkbox" />Remember Me</span>
                         <h6><a href="#">Forgot Password?</a></h6> */}
@@ -35,7 +42,7 @@ export default class Login extends Component{
                     {/* <input type="submit" value={this.state.loginIn ? (<Pulse/>):"Вход"} name="login"/> */}
                             <button type="submit" className="button-submit" name="login">{this.state.loginIn ? (<Pulse color="white"/>):("Вход")}</button>
                     </form>
-                    {/* <p>Don't Have an Account ?<a href="registration.html">Create an account</a></p> */}
+                    { this.state.error &&(<p>Данные неверны!</p>)/* <p>Don't Have an Account ?<a href="registration.html">Create an account</a></p> */}
             </div>
             </div>   
         )

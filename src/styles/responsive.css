@@ -5,6 +5,9 @@
   #tf-home{
       background-attachment: scroll;
   }
+  ol.type{
+      height:40px;
+  }
 }
 
 @media (max-width: 603px){

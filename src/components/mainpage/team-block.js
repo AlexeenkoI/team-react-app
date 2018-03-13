@@ -9,6 +9,16 @@ import tTwo from '../../img/team/Miha.jpg';
 import tThree from '../../img/team/Yura.jpg';
 
 export default class TeamBlock extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            sliders:[
+                {id:1,name : 'Михаил',img:'/Miha.jpg',position:'FrontEnd/BackEnd Web Developer',descripton:'Специалист FrontEnd/BackEnd Web разработке'},
+                {id:2,name : 'Юра',img:'/Yura.jpg',position:'Service / Desktop Developer',descripton:'Специалист по сервисам и серверным решениям.'},
+                {id:3,name : 'Игорь',img:'/Igor2.jpg',position:'Andrioid / IOS Developer',descripton:'Специалист по мобильной разработке'},
+            ]
+        }
+    }
     render(){
         const settings = {
             dots:false,
@@ -52,38 +62,19 @@ export default class TeamBlock extends Component{
                     animateOut="zoomOut"
                     animateOnce={true}>
                 <Slider {...settings}>
-                    <div className="item">
+                {this.state.sliders.map(slider=>(
+                    <div key={slider.id} className="item">
                         <div className="thumbnail">
-                            <img src={tOne} alt="..." className="img-circle team-img"/>
-                            <div className="caption">
-                                <h3>Игорь</h3>
-                                <p>FrontEnd/BackEnd Web Developer</p>
-                                <p>Специалист FrontEnd/BackEnd Web разработке</p>
-                            </div>
+                            <img src={process.env.PUBLIC_URL + slider.img} alt="..." className="img-circle team-img"/>
+                                <div className="caption">
+                                    <h3>{slider.name}</h3>
+                                    <p>{slider.position}</p>
+                                    <p>{slider.descripton}</p>
+                                </div>
                         </div>
                     </div>
-
-                    <div className="item">
-                        <div className="thumbnail">
-                            <img src={tTwo} alt="..." className="img-circle team-img"/>
-                            <div className="caption">
-                                <h3>Михаил</h3>
-                                <p>Service / Desktop Developer</p>
-                                <p>Специалист по сервисам и серверным решениям.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="item">
-                        <div className="thumbnail">
-                            <img src={tThree} alt="..." className="img-circle team-img"/>
-                            <div className="caption">
-                                <h3>Юрий</h3>
-                                <p>Andrioid / IOS Developer</p>
-                                <p>Специалист по мобильной разработке</p>
-                            </div>
-                        </div>
-                    </div>
+                ))}
+                    
                 </Slider>
                 </ScrollAnimation>
                 </div>          

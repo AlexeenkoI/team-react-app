@@ -20,6 +20,8 @@ export default class MainAdmin extends Component{
     constructor(props){
         super(props);
         this.state = {
+            login:'admin',
+            pass:'mihadomain',
             isLogged:false,
             bottomMenu:true
         }
@@ -34,13 +36,19 @@ export default class MainAdmin extends Component{
          document.body.classList.add('adm-bg');
     }
 
+    logOut=()=>{
+        this.setState({isLogged:false});
+    }
+
     tryToLogin=(login,pass)=>{
         console.log(login);
         console.log(pass);
-        this.setState({
-            isLogged:true,
-            showMenu:true
-        });
+        if(this.state.login === login && this.state.pass === pass){
+            this.setState({
+                isLogged:true,
+                showMenu:true
+            });
+        }
 
     }
     componentWillUnmount(){
@@ -77,6 +85,7 @@ export default class MainAdmin extends Component{
                    isShowMenu={this.displayMenu} 
                    show={this.state.showMenu}
                    hideNotifications={this.props.closeInfos}
+                   isLogged={this.logOut}
                    />
                   <Menu 
                   showMenu={this.state.showMenu}

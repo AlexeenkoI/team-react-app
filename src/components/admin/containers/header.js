@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Logo from '../components/navlogo'
 import NavBttn from '../components/navbttn';
+import MailNote from '../components/mailnote'
+import ServerNote from '../components/servernote'
 import LogUser from '../components/loguser';
 
 
@@ -25,11 +27,15 @@ export default class Header extends Component{
                     <NavBttn
                     hideTasks={this.props.hideNotifications}
                     />
+                    <MailNote/>
+                    <ServerNote/>
                 </ul>
             </div>
             <div className="top-nav clearfix">
                 <ul className="nav pull-right top-menu">
-                    <LogUser/>
+                    <LogUser
+                    logout={this.props.isLogged}
+                    />
                 </ul>
             </div>
             </header>

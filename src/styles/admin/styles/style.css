@@ -147,6 +147,9 @@ body a{
     width:120px;
     margin-bottom:40px;
 }
+.dropdown{
+    cursor: pointer;
+}
 .del-circle{
     position: absolute;
     top:0px;
@@ -568,6 +571,48 @@ ul.top-menu>li>a:hover,ul.top-menu>li>a:focus {
     background:#fff;
     border:none;
     left:-10px;
+}
+.in-popover{
+    display:block;
+    position: relative;
+    /* max-width: 320px !important;
+    min-width: 160px !important; */
+    /* top: 42px; */
+    width: 260px !important;
+    padding: 0 10px;
+    -webkit-box-shadow: 0 0px 5px rgba(0,0,0,0.1) !important;
+    box-shadow: 0 0px 5px rgba(0,0,0,0.1) !important;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    background: #fff;
+    border: none;
+    /* left: -10px; */
+}
+.msg-row{
+    background: #f1f2f7;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    float: left;
+    width: 100%;
+}
+.msg-row .subject{
+    display:block;
+}
+.msg-row .subject .from{
+    font-size: 12px;
+    font-weight: 600;
+}
+.msg-row .subject .time{
+    font-size: 11px;
+    font-style: italic;
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+}
+.msg-row>.message{
+    display:block;
 }
 .notify-row .notification span.label {
     display:inline-block;
@@ -1101,7 +1146,8 @@ span.panel-title{
 .alert-icon {
     width: 40px;
     height: 40px;
-    display: inline-block;
+    /* display: inline-block; */
+    display:table-cell;
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
     border-radius: 100%;
@@ -2748,6 +2794,8 @@ h4 input[type="checkbox"] {
 /*--//placeholder-color--*/
 .alert {
     margin-bottom: 23px !important;
+    display: table;
+    width: 100%;
 }
 div#chartContainer1,div#chartContainer2,div#chartContainer3,div#chartContainer4 {
     width: 100%;
