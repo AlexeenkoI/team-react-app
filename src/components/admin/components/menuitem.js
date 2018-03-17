@@ -39,7 +39,7 @@ export default class MenuItem extends Component{
             return(
                 <div>
                     <li>
-                        <Link to={this.props.link ? this.props.link : '/admin'} activeClassName="active">
+                        <Link to={this.props.link ? this.props.link : '/admin'} >
                             <i className="fa fa-dashboard"></i>
                             <span>{this.props.name}</span>
                         </Link>

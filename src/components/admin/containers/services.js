@@ -80,7 +80,7 @@ export default class Services extends Component{
                     return service;
                 }
             })
-            id = this.state.service.findIndex(function(service){
+            id = this.state.services.findIndex(function(service){
                 return service.id === data.id
             });
             let total = this.changeState(res,id);
@@ -173,7 +173,7 @@ export default class Services extends Component{
                              <div key={service.id} className="col-md-4 gallery-grids-left">
                                     <div className="service-grid" onClick={(e)=>this.onServiceClick(service.id,e)}>
                                         <a className="example-image-link">
-                                            <img src={process.env.PUBLIC_URL + service.img} />
+                                            <img src={service.imgUrl ? service.imgUrl : process.env.PUBLIC_URL + service.img} />
                                              <div className="captn">
                                                 <h4>{service.name}</h4>
                                                 <p>{service.description}</p>

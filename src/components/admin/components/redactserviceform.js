@@ -9,12 +9,12 @@ export default class Redactserviceform extends Component{
         this.state = {
             id : this.props.editItem ? this.props.editItem.id : null,
             isLoading : false,
-            imgUrl : this.props.editItem ? this.props.editItem.img : null,
-            img : null,
+            imgUrl : this.props.editItem ? this.props.editItem.imgUrl : null,
+            img : this.props.editItem ? this.props.editItem.img : null,
             name: this.props.editItem ? this.props.editItem.name : null,
             desc : this.props.editItem ? this.props.editItem.description : null, 
             filters : this.props.filters,
-            currentFilters:[]
+            currentFilters: this.props.editItem ? this.props.editItem.currentFilters : []
         }
     }
     handleImageChange=(e)=>{
@@ -104,7 +104,7 @@ export default class Redactserviceform extends Component{
                     {this.state.isLoading ? (
                         <Eye/>
                     ) :(
-                        <img src={this.state.imgUrl ?this.state.imgUrl: '' } alt={this.state.imgUrl? '':'загрузите картинку'} style={{width:"120px",height:"120px"}}/>
+                        <img src={this.state.imgUrl ? this.state.imgUrl: this.state.img } alt={'загрузите картинку'} style={{width:"120px",height:"120px"}}/>
                     )}
                     </div>
                 </div>
