@@ -34,6 +34,11 @@ export default class Services extends Component{
             applyFilter:'All'
         };
     }
+
+    componentDidMount(){
+        console.log('services');
+        console.log(this.props);
+    }
     changeState = (res,id)=>{
         return [
             ...this.state.services.slice(0,id),

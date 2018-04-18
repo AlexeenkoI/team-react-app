@@ -56,7 +56,6 @@ class NavBar extends Component{
     
 
     render(){
-           
         return( 
         <nav id="tf-menu" className="navbar navbar-default navbar-fixed-top">
         <div id="nav-container" className="container ">
@@ -67,7 +66,6 @@ class NavBar extends Component{
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            
             <a className="navbar-brand" href="index.html">Team X</a>
           </div>
   

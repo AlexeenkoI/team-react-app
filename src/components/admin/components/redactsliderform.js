@@ -53,10 +53,10 @@ export default class Redactsliderform extends Component{
         let formData = {
             id:this.state.id,
             imgUrl:this.state.imgUrl,
-            image:this.state.img,
+            img:this.state.imgUrl,
             name:this.state.name,
             position:this.state.job,
-            description:this.state.desc,
+            descripton:this.state.desc,
         }
         console.log(formData);
         this.props.change(formData);

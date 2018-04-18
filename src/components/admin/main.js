@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Switch,Route} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import editMainSlide from './reducers/reducers'
 
 import Header from './containers/header';
 import Menu from './containers/menu';
@@ -15,8 +16,11 @@ import '../../styles/admin/styles/style-responsive.css';
 
 import { CSSTransition, TransitionGroup, Transition } from 'react-transition-group'
 //import PageTransition from 'react-router-page-transition';
+var teststore = createStore(editMainSlide);
 
 export default class MainAdmin extends Component{
+
+
     constructor(props){
         super(props);
         this.state = {
@@ -30,10 +34,12 @@ export default class MainAdmin extends Component{
         // }
         console.log("main");
         console.log(this.props);
+       
     }
 
     componentDidMount(){
          document.body.classList.add('adm-bg');
+         console.log(teststore.getState());
     }
 
     logOut=()=>{
@@ -74,38 +80,38 @@ export default class MainAdmin extends Component{
     render(){
         if(!this.state.isLogged){
             return(
-                // <CSSTransition>
                 <Login login={this.tryToLogin}/>
-                // </CSSTransition>
             )
         }else{
         return(
+            <Provider store={teststore}>
                <div id="test">
-                  <Header
-                   isShowMenu={this.displayMenu} 
-                   show={this.state.showMenu}
-                   hideNotifications={this.props.closeInfos}
-                   isLogged={this.logOut}
-                   />
-                  <Menu 
-                  showMenu={this.state.showMenu}
-                  />
-<TransitionGroup>
-	<CSSTransition
-		key={this.props.location.key}
-		classNames="SlideIn"
-        timeout={{ enter: 600, exit: 0 }}
-        unmountOnExit={true}
-        mountOnEnter={true}
-	>
-                  <Switch >
-                    <Route  exact path="/admin" component={DashBoard}/>
-                    <Route  exact path="/admin/main-slider" component={MainSlider}/>
-                    <Route  exact path="/admin/main-services" component={Services}/>
-                  </Switch>
-                  </CSSTransition>
-</TransitionGroup>
+                    <Header
+                        isShowMenu={this.displayMenu} 
+                        show={this.state.showMenu}
+                        hideNotifications={this.props.closeInfos}
+                        isLogged={this.logOut}
+                    />
+                    <Menu 
+                        showMenu={this.state.showMenu}
+                    />
+                    <TransitionGroup>
+	                    <CSSTransition
+		                    key={this.props.location.key}
+		                    classNames="SlideIn"
+                            timeout={{ enter: 600, exit: 0 }}
+                            unmountOnExit={true}
+                            mountOnEnter={true}
+                        >
+                            <Switch >
+                                <Route  exact path="/admin" component={DashBoard}/>
+                                <Route  exact path="/admin/main-slider" component={MainSlider}/>
+                                <Route  exact path="/admin/main-services" component={Services}/>
+                            </Switch>
+                        </CSSTransition>
+                    </TransitionGroup>
                 </div>
+            </Provider>
 
         )
         }

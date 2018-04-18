@@ -1,44 +1,60 @@
 import React, { Component } from 'react';
 import Slider from 'react-slick';
 import {Button} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router'
+import {mainSlider as actions, showModal , closeModal, changeData, addData, deleteData} from '../actions/actions';
+import { bindActionCreators } from 'redux';
+
 import Redactsliderform from '../components/redactsliderform';
 import imgOne from '../../../img/team/Miha.jpg';
 import cancelImg from '../../../img/cancel.svg';
 
 
 //import { CSSTransitionGroup, Transition } from 'react-transition-group';
-import { CSSTransition, TransitionGroup, Transition } from 'react-transition-group'
+import { CSSTransition, TransitionGroup, Transition } from 'react-transition-group';
 
 
 class MainSlider extends Component{
     constructor(props){
         super(props);
-        this.state={
-            showModal:false,
-            sliders:[
-                {id:1,name : 'Михаил',img:'/Miha.jpg',position:'test',descripton:'test'},
-                {id:2,name : 'Юра',img:'/Yura.jpg',position:'test2',descripton:'test2'},
-                {id:3,name : 'Игорь',img:'/Igor2.jpg',position:'test3',descripton:'test3'},
-            ],
-            editId:null
-        }
+        // this.state={
+        //     showModal:false,
+        //     sliders:[
+        //         {id:1,name : 'Михаил',img:'/Miha.jpg',position:'test',descripton:'test'},
+        //         {id:2,name : 'Юра',img:'/Yura.jpg',position:'test2',descripton:'test2'},
+        //         {id:3,name : 'Игорь',img:'/Igor2.jpg',position:'test3',descripton:'test3'},
+        //     ],
+        //     editId:null
+        // }
     this.onSlideClick = this.onSlideClick.bind(this);
-    console.log(this.props.location);
+    // console.log(this.props.location);
+    }
+
+    componentDidMount(){
+        // console.log('mount');
+        // console.log(this.props);
     }
 
     onSlideClick=(id,e)=>{
         e.preventDefault();
-        this.setState({showModal:true,editId: this.state.sliders.find(slide=>{return slide.id === id})});
+        this.props.openModal(this.props.store.sliders.find(slide=>{return slide.id===id}),true);
+        // console.log('after dispatch');
+        //console.log(this.props);
+        //this.setState({showModal:true,editId: this.state.sliders.find(slide=>{return slide.id === id})});
     }
     onAddBttnClick=(e)=>{
         e.preventDefault();
-        this.setState({showModal:true})
+        // this.setState({showModal:true})
+        this.props.openModal(null,true);
     }
     onHideModal = (id,e)=>{
         if(id!=null){
-            this.setState({showModal:false, editId:null});
+            this.props.closeModal(id);
+           // this.setState({showModal:false, editId:null});
         }else{
-            this.setState({showModal:false});
+            this.props.closeModal(id);
+            //this.setState({showModal:false});
         }
     }
     changeState = (res,id)=>{
@@ -67,9 +83,10 @@ class MainSlider extends Component{
     }
     onDelBttn=(id,e)=>{
         e.stopPropagation(); //Block parent-up event bubbling
-        this.setState({sliders:this.state.sliders.filter(item =>{
-            return item.id !==id;
-        })});
+        this.props.deleteSlide(id);
+        // this.setState({sliders:this.state.sliders.filter(item =>{
+        //     return item.id !==id;
+        // })});
     }
     changeData=(data)=>{
         let res;
@@ -77,15 +94,17 @@ class MainSlider extends Component{
         if(data.id === null){
 
             res = {
-                id : this.state.sliders.length+2,
+                id : this.props.store.sliders.length+2,
                 name: data.name,
                 position : data.position,
                 description : data.description,
                 img : data.imgUrl
             }
-            console.log(res);
-            let t = this.addToState(this.state.sliders,res);
-            this.setState({sliders:t})
+            //console.log(res);
+            this.props.addSlide(data);
+
+            //let t = this.addToState(this.state.sliders,res);
+            //this.setState({sliders:t})
         }else{
             res = this.state.sliders.find(function(slide){
                 if(slide.id === data.id){
@@ -96,12 +115,13 @@ class MainSlider extends Component{
                     return slide;
                 }
             })
-            id = this.state.sliders.findIndex(function(slide){
-                return slide.id === data.id
-            });
-            let total = this.changeState(res,id);
+            this.props.editSlide(data);
+            // id = this.state.sliders.findIndex(function(slide){
+            //     return slide.id === data.id
+            // });
+            // let total = this.changeState(res,id);
         }
-        console.log(this.state.sliders);
+        //console.log(this.state.sliders);
     }
     render(){
         return(
@@ -121,7 +141,7 @@ class MainSlider extends Component{
                         <div className="gallery-grids">
                             <div className="gallery-top-grids">
                                 <TransitionGroup>
-                                {this.state.sliders.map(slide=>(
+                                {this.props.store.sliders.map(slide=>(
                                     <CSSTransition 
                                      key={slide.id}
                                     timeout={300}
@@ -162,11 +182,11 @@ class MainSlider extends Component{
                         </div>
                     </div>
                 </section>
-                {this.state.showModal && (
+                {this.props.store.showModal && (
                 <Redactsliderform
-                show={this.state.showModal}
+                show={this.props.store.showModal}
                 hide={this.onHideModal}
-                editItem={this.state.editId}
+                editItem={this.props.store.editId}
                 change={this.changeData}
                 />
                 )}
@@ -177,4 +197,21 @@ class MainSlider extends Component{
         )
     }
 }
+const mapStateToProps = (state,ownProps) => {
+    //console.log('map state to props');
+    //console.log(state);
+    return { store: state }
+}
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        openModal : (id,switcher)=>dispatch(showModal(id,switcher)),
+        closeModal : (id)=>dispatch(closeModal(id)),
+        addSlide : (result)=>dispatch(addData(result)),
+        deleteSlide : (id)=>dispatch(deleteData(id)),
+        editSlide : (data)=>dispatch(changeData(data))
+    }
+    
+}
+MainSlider = withRouter(connect(mapStateToProps,mapDispatchToProps)(MainSlider));
 export default MainSlider;
+//export default MainSlider;
