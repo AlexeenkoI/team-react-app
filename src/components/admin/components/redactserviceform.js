@@ -12,10 +12,11 @@ export default class Redactserviceform extends Component{
             imgUrl : this.props.editItem ? this.props.editItem.imgUrl : null,
             img : this.props.editItem ? this.props.editItem.img : null,
             name: this.props.editItem ? this.props.editItem.name : null,
-            desc : this.props.editItem ? this.props.editItem.description : null, 
+            description : this.props.editItem ? this.props.editItem.description : null, 
             filters : this.props.filters,
             currentFilters: this.props.editItem ? this.props.editItem.currentFilters : []
         }
+        console.log('editor');
     }
     handleImageChange=(e)=>{
         let file = e.target.files[0];
@@ -52,7 +53,7 @@ export default class Redactserviceform extends Component{
             imgUrl:this.state.imgUrl,
             image:this.state.img,
             name:this.state.name,
-            description:this.state.desc,
+            description:this.state.description,
         }
         this.props.change(this.state);
         this.props.hide(this.props.editItem? this.props.editItem : null,e);
@@ -114,7 +115,7 @@ export default class Redactserviceform extends Component{
                 </div>
                 <div className="form-group">
                     <label >Описание</label>
-                    <input type="text" className="form-control" name="desc" id="job" value={this.state.desc ? this.state.desc : ''} placeholder="Описание" onChange={(e)=>this.onChange(e)}/>
+                    <input type="text" className="form-control" name="description" id="job" value={this.state.description ? this.state.description : ''} placeholder="Описание" onChange={(e)=>this.onChange(e)}/>
                 </div>
                 <div className="form-group">
                 <label >Категории</label>

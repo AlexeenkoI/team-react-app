@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
-
 import { Form, FormControl, FormGroup, ControlLabel, Button } from 'react-bootstrap'
 import cancelImg from '../../../img/cancel.svg';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router'
+import * as actions from '../actions/actions';
+import {actionString, actionStringService} from  '../helpers/actionstrings';
 
 import { CSSTransition, TransitionGroup, Transition } from 'react-transition-group'
 import Redactserviceform from '../components/redactserviceform';
-
 import ScrollAnimation from 'react-animate-on-scroll';
 
-export default class Services extends Component{
+class Services extends Component{
     constructor(props){
         super(props);
         this.state={
@@ -55,12 +57,12 @@ export default class Services extends Component{
 
     filterChange=(e)=>{
         console.log(e.target.value);
-        this.setState({applyFilter:e.target.value});
+       // this.setState({applyFilter:e.target.value});
+        this.props.filterService(e.target.value)
         
     }
 
     changeData=(data)=>{
-        console.log(data);
         let res;
         let id;
         if(data.id === null){
@@ -73,8 +75,9 @@ export default class Services extends Component{
             //     img : data.imgUrl
             // }
             // console.log(res);
-            let t = this.addToState(this.state.services,data);
-            this.setState({services:t})
+            //let t = this.addToState(this.state.services,data);
+            //this.setState({services:t})
+            this.props.addService(data);
         }else{
             res = this.state.services.find(function(service){
                 if(service.id === data.id){
@@ -88,32 +91,37 @@ export default class Services extends Component{
             id = this.state.services.findIndex(function(service){
                 return service.id === data.id
             });
-            let total = this.changeState(res,id);
+            //let total = this.changeState(res,id);
+            this.props.editService(data);
         }
-        console.log(this.state.services);
+        //console.log(this.state.services);
     }
 
     onServiceClick=(id,e)=>{
         e.preventDefault();
-        this.setState({showModal:true,editId: this.state.services.find(service=>{return service.id === id})});
+        this.props.openModal(this.props.store.services.find(service=>{return service.id === id}),true);
+        //this.setState({showModal:true,editId: this.state.services.find(service=>{return service.id === id})});
     }
 
     onDelBttn=(id,e)=>{
         e.stopPropagation(); //Block parent-up event bubbling
-        this.setState({services:this.state.services.filter(item =>{
-            return item.id !==id;
-        })});
+        // this.setState({services:this.state.services.filter(item =>{
+        //     return item.id !==id;
+        // })});
+        this.props.deleteService(id);
     }
     onHideModal = (id,e)=>{
-        if(id!=null){
-            this.setState({showModal:false, editId:null});
-        }else{
-            this.setState({showModal:false});
-        }
+        // if(id!=null){
+        //     this.setState({showModal:false, editId:null});
+        // }else{
+        //     this.setState({showModal:false});
+        // }
+        this.props.closeModal(id);
     }
     onAddBttnClick=(e)=>{
         e.preventDefault();
-        this.setState({showModal:true})
+        //this.setState({showModal:true})
+        this.props.openModal(null,true);
     }
     
     render(){
@@ -137,9 +145,9 @@ export default class Services extends Component{
                         </header>
                         <div className="filter-panel">
                             <div className="col-md-4">
-                                <FormControl bsSize="small" componentClass="select" placeholder="select" onChange={this.filterChange.bind(this)}>
+                                <FormControl bsSize="small" value={this.props.store.applyFilter==='All'? 'All': this.props.store.applyFilter} componentClass="select" placeholder="select" onChange={this.filterChange.bind(this)} >
                                 <option value="All">Все</option>
-                                    {this.state.filters.map(filter=>(
+                                    {this.props.store.filters.map(filter=>(
                                         <option key={filter.id} value={filter.value}>{filter.name}</option>
                                     ))}
                                 </FormControl>
@@ -157,8 +165,8 @@ export default class Services extends Component{
                         <div className="gallery-grids">
                         <div className="gallery-top-grids">
                         <TransitionGroup>
-                        {this.state.services.filter(item=>{ 
-                            return this.state.applyFilter === 'All' ? item : item.currentFilters.includes(this.state.applyFilter)
+                        {this.props.store.services.filter(item=>{ 
+                            return this.props.store.applyFilter === 'All' ? item : item.currentFilters.includes(this.props.store.applyFilter)
                         }).map(service=>(
                             <CSSTransition 
                                 key={service.id}
@@ -197,13 +205,13 @@ export default class Services extends Component{
                     </div>
                         <div className="clearfix"></div>
                     </div>
-                    {this.state.showModal && (
+                    {this.props.store.showModal && (
                         <Redactserviceform
-                            show={this.state.showModal}
+                            show={this.props.store.showModal}
                             hide={this.onHideModal}
-                            editItem={this.state.editId}
+                            editItem={this.props.store.editId}
                             change={this.changeData}
-                            filters={this.state.filters}
+                            filters={this.props.store.filters}
                         />
                 )}
                 </section>
@@ -213,3 +221,29 @@ export default class Services extends Component{
         );
     }
 }
+const mapStateToProps = (state) => {
+    return { store: state.editSerivces }
+}
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        openModal : (id,switcher)=>dispatch(actions.showServiceModal(id,switcher)),
+        closeModal : (incid)=>dispatch({
+            type:actionStringService.SHOW_ITEM,
+            showModal:false,
+            id:null
+        }),
+        addService : (result)=>dispatch({
+            type:actionStringService.ADD,
+            data:result
+        }),
+        deleteService : (id)=>dispatch(actions.deleteService(id)),
+        editService : (result)=>dispatch({
+            type:actionStringService.EDIT,
+            id:result.id,
+            data:result
+        }),
+        filterService : (value)=>dispatch(actions.filterData(value))
+    }
+    
+}
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Services));

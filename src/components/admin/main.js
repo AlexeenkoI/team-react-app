@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import {Switch,Route} from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import editMainSlide from './reducers/reducers'
+import thunkMiddleware from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
+import { combineReducers } from 'redux'
+import {editMainSlide,editSerivces} from './reducers/reducers'
+import {serverNotes,mailNotes,taskNotes} from './reducers/notereducers'
+
 
 import Header from './containers/header';
 import Menu from './containers/menu';
@@ -16,8 +20,15 @@ import '../../styles/admin/styles/style-responsive.css';
 
 import { CSSTransition, TransitionGroup, Transition } from 'react-transition-group'
 //import PageTransition from 'react-router-page-transition';
-var teststore = createStore(editMainSlide);
-
+const AppStore = combineReducers({
+    editMainSlide,
+    editSerivces,
+    serverNotes,
+    mailNotes,
+    taskNotes
+})
+var store = createStore(AppStore,applyMiddleware(thunkMiddleware));
+//
 export default class MainAdmin extends Component{
 
 
@@ -39,7 +50,7 @@ export default class MainAdmin extends Component{
 
     componentDidMount(){
          document.body.classList.add('adm-bg');
-         console.log(teststore.getState());
+         console.log(store.getState());
     }
 
     logOut=()=>{
@@ -84,7 +95,7 @@ export default class MainAdmin extends Component{
             )
         }else{
         return(
-            <Provider store={teststore}>
+            <Provider store={store}>
                <div id="test">
                     <Header
                         isShowMenu={this.displayMenu} 

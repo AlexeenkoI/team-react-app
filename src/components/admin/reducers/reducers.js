@@ -1,37 +1,39 @@
-import {mainSlider} from '../actions/actions';
+//import * as actions from '../actions/actions';
+import {actionString, actionStringService} from  '../helpers/actionstrings';
 
 import { combineReducers } from 'redux';
 
 const initialState = {
-    showModal:false,
-    sliders:[
-        {id:1,name : 'Михаил',img:'/Miha.jpg',position:'test',descripton:'test'},
-        {id:2,name : 'Юра',img:'/Yura.jpg',position:'test2',descripton:'test2'},
-        {id:3,name : 'Игорь',img:'/Igor2.jpg',position:'test3',descripton:'test3'},
-    ],
-    editId:null
+        showModal:false,
+        sliders:[
+            {id:1,name : 'Михаил',img:'/Miha.jpg',position:'test',descripton:'test'},
+            {id:2,name : 'Юра',img:'/Yura.jpg',position:'test2',descripton:'test2'},
+            {id:3,name : 'Игорь',img:'/Igor2.jpg',position:'test3',descripton:'test3'},
+        ],
+        editId:null
 }
 
-export default function editMainSlide(state = initialState, action){
+export function editMainSlide(state = initialState, action){
     switch(action.type){
-        case mainSlider.SHOW_MODAL:
+        case actionString.SHOW_ITEM:
+            console.log('first reducer')
             console.log(action);
             return Object.assign({}, state, {
                 showModal: action.showModal,
-                editId: action.editId
+                editId: action.editId,
             })
-        case mainSlider.ADD_SLIDE:
+        case actionString.ADD:
             return Object.assign({}, state, {
                 sliders: [
                 ...state.sliders,
                     action.data
                 ]
             })
-        case mainSlider.DELETE_SLIDE:
-            return Object.assign({}, {
+        case actionString.DELETE:
+            return Object.assign({},state,{
                 sliders: state.sliders.filter(slider => slider.id !== action.deleteId)
             })     
-        case mainSlider.EDIT_SLIDE:
+        case actionString.EDIT:
         return Object.assign({},state,{
             sliders: state.sliders.map( slide =>{
                 if(slide.id === action.id){
@@ -43,5 +45,66 @@ export default function editMainSlide(state = initialState, action){
         default:
             return state
 
+    }
+}
+
+const initialServiceState={
+    filters:[
+        {id:0,name:"Web",value:"Web"},
+        {id:1,name:"Desktop",value:"Desktop"},
+        {id:2,name:"Mobile",value:"Mobile"},
+        {id:3,name:"Service",value:"Service"},
+    ],
+    services:[
+        {id:0,name:"Веб Интерфейс",description:"dasdasd",img:"/portfolio/01.jpg",currentFilters:["Web"]},
+        {id:1,name:"Десктопные приложения",description:"asdasd2",img:"/portfolio/02.jpg",currentFilters:["Desktop"]},
+        {id:2,name:"Создание сервисов",description:"asdasdas3",img:"/portfolio/03.jpg",currentFilters:["Service"]},
+        {id:3,name:"Мобильная разработка",description:"asdasda4",img:"/portfolio/04.jpg",currentFilters:["Mobile"]},
+        {id:4,name:"Индивидуальный дизайн",description:"asdasda5",img:"/portfolio/05.jpg",currentFilters:["Web","Desktop"]},
+        {id:5,name:"Индивидуальный дизайн мобильного приложения",description:"asdasda6",img:"/portfolio/06.jpg",currentFilters:["Mobile"]},
+        {id:6,name:"Создание тех задания",description:"asdasda7",img:"/portfolio/07.jpg",currentFilters:["Service"]},
+    ],
+    editId:null,
+    showModal:false,
+    applyFilter:'All'
+};
+
+export function editSerivces(state = initialServiceState,action){
+    switch(action.type){
+        case actionStringService.SHOW_ITEM:
+            return Object.assign({}, state, {
+                showModal: action.showModal,
+                editId: action.editId,
+            })
+
+        case actionStringService.ADD :
+            return Object.assign({}, state, {
+                services: [
+                ...state.services,
+                    action.data
+                ]
+            })
+        case actionStringService.DELETE :
+            return Object.assign({},state,{
+                services: state.services.filter(service => service.id !== action.deleteId)
+            })     
+        case actionStringService.EDIT :
+        console.log(action);
+            return Object.assign({},state,{
+                services: state.services.map( service =>{
+                    if(service.id === action.id){
+                        service = action.data
+                    }
+                    return service
+                })
+            })
+        case actionStringService.FILTER :
+            return Object.assign({}, state, {
+                applyFilter:action.filter,
+                showModal: action.showModal,
+                editId: action.editId,
+            })
+        default:
+            return state
     }
 }

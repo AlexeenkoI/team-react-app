@@ -1,29 +1,39 @@
 import React, { Component } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import * as actions from '../actions/actions';
+import {actionTaskNote} from  '../helpers/actionstrings';
 
-export default class NavBttn extends Component{
+class NavBttn extends Component{
     constructor(props){
         super(props);
         this.state = {
             showTasks : false
         }
-        console.log(this.state);
+        console.log(this.props);
+    }
+    componentWillMount(){
+        this.props.initFetch();
     }
     
     render(){
-        const taskPopOver = (
-            <Popover id="tasks" title="1 пропущенное задание">
-                    <a className="task-item">
-                        <div className="task-info clearfix">
-                            <div className="desc pull-left">
-                                <h5>Закончить верстку</h5>
-                                <p>75% , Дедлайн  18 Февраля</p>
-                            </div>
-                                    <span className="notification-pie-chart pull-right" data-percent="45">
-                            <span className="percent"></span>
-                            </span>
+        const taskPopOver = this.props.state.isFetching? (<Popover id="tasks"><div>Загружаю...</div></Popover>) : (
+            <Popover id="tasks" title={this.props.state.count + " пропущенное задание"}>
+            {this.props.state.tasks.map(task=>(
+                    <a key={task.id} className="task-item">
+                    <div className="task-info clearfix">
+                        <div className="desc pull-left">
+                            <h5>{task.task}</h5>
+                            <p>{task.text}</p>
                         </div>
-                    </a>
+                        <span className="notification-pie-chart pull-right" data-percent="45">
+                        <span className="percent"></span>
+                        </span>
+                    </div>
+                </a>
+            ))}
+
                 
                     {/* <a href="#" className="task-item">See All Tasks</a>      */}
             </Popover>
@@ -36,24 +46,27 @@ export default class NavBttn extends Component{
                 rootClose
                 placement="bottom"
                 overlay={taskPopOver}
+                onClick={()=>{this.props.shown()}}
             >
             <a data-toggle="dropdown" className="dropdown-toggle">
                 <i className="fa fa-tasks"></i>
-                <span className="badge bg-success">1</span>
+                {this.props.state.count? <span className="badge bg-success">{this.props.state.count}</span>:''}
             </a>
             </OverlayTrigger>
-            {/* <OverlayTrigger
-                trigger="click"
-                rootClose
-                placement="bottom"
-                overlay={mailPopOver}
-            >
-              <a data-toggle="dropdown" className="dropdown-toggle">
-                <i className="fa fa-envelope-o"></i>
-                <span className="badge bg-success">1</span>
-            </a>
-            </OverlayTrigger> */}
         </li>
         )
     }
 }
+const mapStateToProps = (state)=>{
+    return{state:state.taskNotes}
+}
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        initFetch : ()=>{dispatch(actions.fetchTaskNotes())},
+        shown:()=>{dispatch({
+            type:actionTaskNote.SHOWN
+        })}
+    }
+
+}
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(NavBttn));
