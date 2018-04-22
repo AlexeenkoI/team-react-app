@@ -5,10 +5,15 @@ import SmallStats from '../components/smallstats';
 import TaskWidget from '../components/taskswidget';
 import { CSSTransition } from 'react-transition-group';
 
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import * as actions from '../actions/actions';
+
 import { Spinner } from 'react-preloading-component';
 import  Preloader from '../helpers/preloader';
+import {actionDashboard} from  '../helpers/actionstrings';
 
-export default class Dashboard extends Component{
+class Dashboard extends Component{
     constructor(props){
         super(props);
         this.state={
@@ -16,10 +21,14 @@ export default class Dashboard extends Component{
         }
     }
     componentDidMount(){
-        setTimeout(function(){
-            console.log('callback');
-            this.setState({isLoading:false});
-        }.bind(this),2000);
+        console.log('try-fetch');
+        this.props.fetchData();
+        //console.log('dash-props');
+        //console.log(this.props);
+        // setTimeout(function(){
+        //     console.log('callback');
+        //     this.setState({isLoading:false});
+        // }.bind(this),2000);
     }
     render(){
         return(
@@ -32,19 +41,17 @@ export default class Dashboard extends Component{
         //     transitionName="SlideIn"
         //   >
         <div>
-        {this.state.isLoading ? (
+        {this.props.state.fetching ? (
             <Preloader/>
         ):(
             <section id="main-content">
                 <section className="wrapper">
                     <QuickPreview/>
-                <div className="clearfix"></div>
-                
+                    <div className="clearfix"></div>
                     <div className="agileits-w3layouts-stats">
-                        <SmallStats/>
-                        <TaskWidget/>
+                    <SmallStats/>
+                    <TaskWidget/>
                     </div>
-                
                 </section>  
             </section>
         )}
@@ -53,3 +60,13 @@ export default class Dashboard extends Component{
         )
     }
 }
+const mapStateToProps = (state)=>{
+    return{state:state.dashBoard}
+}
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        fetchData: ()=>dispatch(actions.fetchDashboardData())
+    }
+
+}
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Dashboard));

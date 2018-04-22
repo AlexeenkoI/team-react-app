@@ -16,7 +16,7 @@ class ServerNote extends Component{
     render(){
         const srvPopOver = this.props.state.isFetching ? 
         ( <Popover id="srv"><div>Загружаю...</div></Popover>) :(
-            <Popover id="srv" title="3 уведомления">
+            <Popover id="srv" title="Новые уведомления">
                     {this.props.state.notes.map(note=>(
                         <div key={note.id} className={"clearfix alert alert-"+note.type}>
                             <span className="alert-icon"><i className="fa fa-bolt"></i></span>

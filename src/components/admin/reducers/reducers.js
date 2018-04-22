@@ -1,5 +1,5 @@
 //import * as actions from '../actions/actions';
-import {actionString, actionStringService} from  '../helpers/actionstrings';
+import {actionString, actionStringService,actionDashboard,loginStrings} from  '../helpers/actionstrings';
 
 import { combineReducers } from 'redux';
 
@@ -107,4 +107,40 @@ export function editSerivces(state = initialServiceState,action){
         default:
             return state
     }
+}
+
+export function dashBoard(state={
+    //user:{id:1,name:'Игорь',}
+    fetching:true
+},action){
+    switch(action.type){
+        case actionDashboard.INITIAL_FETCH:
+            return state
+        case actionDashboard.FETCH_COMPLETE:
+            return Object.assign({}, state, {
+                fetching:false,
+                data:action.data
+            })
+        default:
+            return state
+    }
+}
+export function logData(state={
+    isLogged:false
+},action){
+    switch(action.type){
+        case  loginStrings.LOGIN_ATTEMPT:
+            return state
+        case loginStrings.LOGIN_SUCCESS:
+            console.log('change to log');
+            return Object.assign({}, state, {
+                isLogged:true,
+                data:action.data
+            })
+        case loginStrings.LOGIN_ERROR:
+            return state
+        default:
+            return state;
+    }
+
 }

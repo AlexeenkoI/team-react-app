@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Pulse } from 'react-preloading-component';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router'
+import * as actions from '../actions/actions';
 
-
-export default class Login extends Component{
+class Login extends Component{
     constructor(props){
         super(props);
         this.props = props;
@@ -10,6 +12,10 @@ export default class Login extends Component{
             loginIn:false,
             error:null
         }
+    }
+    componentWillMount(){
+        console.log('log props');
+        console.log(this.props);
     }
 
     logging=(e)=>{
@@ -19,14 +25,15 @@ export default class Login extends Component{
         const currpass = 'mihadomain';
         let login = this.admLogin.value;
         let pass = this.admPass.value
-        if(login.toLowerCase() === currlogin.toLowerCase() && pass.toLowerCase() ===currpass.toLowerCase()){
-            setTimeout(function(){
-                this.props.login(login,pass);
-            }.bind(this),1500)
-            //this.props.login(login,pass);
-        }else{
-            this.setState({loginIn:false,error:true});
-        }
+        this.props.tryToLogin();
+        // if(login.toLowerCase() === currlogin.toLowerCase() && pass.toLowerCase() ===currpass.toLowerCase()){
+        //     setTimeout(function(){
+        //         this.props.login(login,pass);
+        //     }.bind(this),1500)
+        //     //this.props.login(login,pass);
+        // }else{
+        //     this.setState({loginIn:false,error:true});
+        // }
     }
     render(){
         return(
@@ -48,3 +55,14 @@ export default class Login extends Component{
         )
     }
 }
+
+const mapStateToProps = (state,ownProps) => {
+    return { store: state.logData }
+}
+const mapDispatchToProps = (dispatch) =>{
+    return {
+        tryToLogin: ()=>dispatch(actions.loginToApp())
+    }
+    
+}
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Login));

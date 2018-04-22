@@ -14,32 +14,30 @@ import ScrollAnimation from 'react-animate-on-scroll';
 class Services extends Component{
     constructor(props){
         super(props);
-        this.state={
-            filters:[
-                // {id:0,name:"Все",value:"All"},
-                {id:0,name:"Web",value:"Web"},
-                {id:1,name:"Desktop",value:"Desktop"},
-                {id:2,name:"Mobile",value:"Mobile"},
-                {id:3,name:"Service",value:"Service"},
-            ],
-            services:[
-                {id:0,name:"Веб Интерфейс",description:"dasdasd",img:"/portfolio/01.jpg",currentFilters:["Web"]},
-                {id:1,name:"Десктопные приложения",description:"asdasd2",img:"/portfolio/02.jpg",currentFilters:["Desktop"]},
-                {id:2,name:"Создание сервисов",description:"asdasdas3",img:"/portfolio/03.jpg",currentFilters:["Service"]},
-                {id:3,name:"Мобильная разработка",description:"asdasda4",img:"/portfolio/04.jpg",currentFilters:["Mobile"]},
-                {id:4,name:"Индивидуальный дизайн",description:"asdasda5",img:"/portfolio/05.jpg",currentFilters:["Web","Desktop"]},
-                {id:5,name:"Индивидуальный дизайн мобильного приложения",description:"asdasda6",img:"/portfolio/06.jpg",currentFilters:["Mobile"]},
-                {id:6,name:"Создание тех задания",description:"asdasda7",img:"/portfolio/07.jpg",currentFilters:["Service"]},
-            ],
-            editId:null,
-            showModal:false,
-            applyFilter:'All'
-        };
+        // this.state={
+        //     filters:[
+        //         // {id:0,name:"Все",value:"All"},
+        //         {id:0,name:"Web",value:"Web"},
+        //         {id:1,name:"Desktop",value:"Desktop"},
+        //         {id:2,name:"Mobile",value:"Mobile"},
+        //         {id:3,name:"Service",value:"Service"},
+        //     ],
+        //     services:[
+        //         {id:0,name:"Веб Интерфейс",description:"dasdasd",img:"/portfolio/01.jpg",currentFilters:["Web"]},
+        //         {id:1,name:"Десктопные приложения",description:"asdasd2",img:"/portfolio/02.jpg",currentFilters:["Desktop"]},
+        //         {id:2,name:"Создание сервисов",description:"asdasdas3",img:"/portfolio/03.jpg",currentFilters:["Service"]},
+        //         {id:3,name:"Мобильная разработка",description:"asdasda4",img:"/portfolio/04.jpg",currentFilters:["Mobile"]},
+        //         {id:4,name:"Индивидуальный дизайн",description:"asdasda5",img:"/portfolio/05.jpg",currentFilters:["Web","Desktop"]},
+        //         {id:5,name:"Индивидуальный дизайн мобильного приложения",description:"asdasda6",img:"/portfolio/06.jpg",currentFilters:["Mobile"]},
+        //         {id:6,name:"Создание тех задания",description:"asdasda7",img:"/portfolio/07.jpg",currentFilters:["Service"]},
+        //     ],
+        //     editId:null,
+        //     showModal:false,
+        //     applyFilter:'All'
+        // };
     }
 
     componentDidMount(){
-        console.log('services');
-        console.log(this.props);
     }
     changeState = (res,id)=>{
         return [
@@ -63,8 +61,6 @@ class Services extends Component{
     }
 
     changeData=(data)=>{
-        let res;
-        let id;
         if(data.id === null){
 
             // res = {
@@ -79,18 +75,18 @@ class Services extends Component{
             //this.setState({services:t})
             this.props.addService(data);
         }else{
-            res = this.state.services.find(function(service){
-                if(service.id === data.id){
-                    service.name = data.name,
-                    service.position = data.position,
-                    service.descripton = data.desc
-                    service.img = data.imgUrl
-                    return service;
-                }
-            })
-            id = this.state.services.findIndex(function(service){
-                return service.id === data.id
-            });
+            // res = this.state.services.find(function(service){
+            //     if(service.id === data.id){
+            //         service.name = data.name,
+            //         service.position = data.position,
+            //         service.descripton = data.desc
+            //         service.img = data.imgUrl
+            //         return service;
+            //     }
+            // })
+            // id = this.state.services.findIndex(function(service){
+            //     return service.id === data.id
+            // });
             //let total = this.changeState(res,id);
             this.props.editService(data);
         }
@@ -125,8 +121,6 @@ class Services extends Component{
     }
     
     render(){
-        let aFilter=this.state.applyFilter;
-
         return(
             //  <TransitionGroup>
             // <CSSTransition 

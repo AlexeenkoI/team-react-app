@@ -34,3 +34,14 @@ export const actionTaskNote = {
     FETCH_DATA : 'FETCH_TASK_NOTES',
     SHOWN : 'TASK_NOTES_SHOWN'
 }
+
+export const actionDashboard = {
+    INITIAL_FETCH : 'INITIALIZE_DASHBOARD',
+    FETCH_COMPLETE:'INIT_FETCH_COMPLETE',
+}
+
+export const loginStrings = {
+    LOGIN_ATTEMPT:'LOGIN_ATTEMPT',
+    LOGIN_SUCCESS:'LOGIN_SUCCESS',
+    LOGIN_ERROR:'LOGIN_ERROR'
+}

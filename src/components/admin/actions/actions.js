@@ -1,4 +1,4 @@
-import {actionString, actionStringService, actionServerNote, actionMailNote,actionTaskNote} from  '../helpers/actionstrings';
+import {actionString, actionStringService, actionServerNote, actionMailNote,actionTaskNote, actionDashboard,loginStrings} from  '../helpers/actionstrings';
 
 
 /* Slider actions */
@@ -109,7 +109,6 @@ export function fetchMailNotes(){
 /* Task notes component actions */
 
 export function recieveTaskNotes(data){
-    console.log('recieved tasks');
     return{
         type:actionTaskNote.FETCH_COMPLETE,
         tasks:[
@@ -122,11 +121,53 @@ export function recieveTaskNotes(data){
 
 export function fetchTaskNotes(){
     return function(dispatch){
-        console.log('fetching tasks');
         setTimeout(function(){
-            console.log('timeout-ended-mails');
             return dispatch(recieveTaskNotes())
         },2500)
+    }
+}
+
+/*Dashboard actions */
+export function recieveDashboardData(){
+    return{
+        type:actionDashboard.FETCH_COMPLETE,
+        user:{id:1,name:'Игорь'},
+        data:[
+            {id:1,name:'test'}
+        ]
+    }
+}
+
+export function fetchDashboardData(){
+    return function(dispatch,getState){
+        setTimeout(function(){
+            return dispatch(recieveDashboardData());
+        },2000)
+    }
+}
+
+/* Login actions */
+
+export function loginSuccess(){
+    console.log('imitate success');
+    return {
+        type: loginStrings.LOGIN_SUCCESS,
+        data:{id:1,name:'Игорь'}
+    }
+}
+
+export function loginError(){
+    return{
+        type: loginStrings.LOGIN_ERROR
+    }
+}
+
+export function loginToApp(){
+    return function(dispatch){
+        console.log('attempt login');
+        setTimeout(function(){
+            return dispatch(loginSuccess())
+        },2000)
     }
 }
 

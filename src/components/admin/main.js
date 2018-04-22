@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
 import { combineReducers } from 'redux'
-import {editMainSlide,editSerivces} from './reducers/reducers'
+import {editMainSlide,editSerivces,dashBoard,logData} from './reducers/reducers'
 import {serverNotes,mailNotes,taskNotes} from './reducers/notereducers'
 
 
@@ -21,6 +21,8 @@ import '../../styles/admin/styles/style-responsive.css';
 import { CSSTransition, TransitionGroup, Transition } from 'react-transition-group'
 //import PageTransition from 'react-router-page-transition';
 const AppStore = combineReducers({
+    logData,
+    dashBoard,
     editMainSlide,
     editSerivces,
     serverNotes,
@@ -38,13 +40,14 @@ export default class MainAdmin extends Component{
             login:'admin',
             pass:'mihadomain',
             isLogged:false,
-            bottomMenu:true
+            bottomMenu:true,
+            showMenu:true
         }
         // this.props= {
         //     closeInfos : false
         // }
         console.log("main");
-        console.log(this.props);
+        //console.log(this.props);
        
     }
 
@@ -72,7 +75,6 @@ export default class MainAdmin extends Component{
         document.body.classList.remove('adm-bg');
 
     }
-
     displayMenu = (menuState)=>{
         this.setState(prevState => ({
             showMenu: menuState
@@ -89,14 +91,18 @@ export default class MainAdmin extends Component{
     }
 
     render(){
-        if(!this.state.isLogged){
-            return(
-                <Login login={this.tryToLogin}/>
-            )
-        }else{
+        let unsubscribe = store.subscribe(() =>{
+            let isLogginIn = store.getState();
+            this.setState({isLogged: isLogginIn.logData.isLogged});
+        }
+        )
+       // console.log(isLogginIn.logData);
+         
+        
         return(
             <Provider store={store}>
-               <div id="test">
+            {!this.state.isLogged ? (<Login login={this.tryToLogin}/>):
+               (<div id="test">
                     <Header
                         isShowMenu={this.displayMenu} 
                         show={this.state.showMenu}
@@ -121,10 +127,10 @@ export default class MainAdmin extends Component{
                             </Switch>
                         </CSSTransition>
                     </TransitionGroup>
-                </div>
+                </div>)}
             </Provider>
 
         )
-        }
+        
     }
-} 
+}

@@ -19,7 +19,7 @@ class NavBttn extends Component{
     
     render(){
         const taskPopOver = this.props.state.isFetching? (<Popover id="tasks"><div>Загружаю...</div></Popover>) : (
-            <Popover id="tasks" title={this.props.state.count + " пропущенное задание"}>
+            <Popover id="tasks" title="Задачи">
             {this.props.state.tasks.map(task=>(
                     <a key={task.id} className="task-item">
                     <div className="task-info clearfix">

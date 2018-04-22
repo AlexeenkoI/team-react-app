@@ -15,7 +15,7 @@ class MailNote extends Component{
     render(){
         const mailPopOver = this.props.state.isFetching ? 
         (<Popover id="mail"><div>Загружаю...</div></Popover>) : (
-            <Popover id="mail" title="1 пропущенное Сообщение">
+            <Popover id="mail" title="Новые сообщения">
                 {this.props.state.messages.map(msg=>(
                     <div key={msg.id} className="msg-row">
                     {/* <span className="photo"><img alt="avatar" src="images/3.png"/></span> */}
