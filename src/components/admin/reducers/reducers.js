@@ -139,8 +139,21 @@ export function logData(state={
             })
         case loginStrings.LOGIN_ERROR:
             return state
+        case loginStrings.LOGOUT:
+            return Object.assign({}, state, {
+                isLogged:false,
+            })
         default:
             return state;
     }
 
+}
+
+export function mainReducer(state={
+    initialize:false
+},action){
+    switch(action.type){
+        default:
+            return state
+    }
 }

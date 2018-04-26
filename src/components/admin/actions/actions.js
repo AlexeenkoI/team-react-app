@@ -171,6 +171,12 @@ export function loginToApp(){
     }
 }
 
+export function logout(){
+    return{
+        type:loginStrings.LOGOUT
+    }
+}
+
 
 //import fetch from 'isomorphic-fetch'
 

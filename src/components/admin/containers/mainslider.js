@@ -23,6 +23,7 @@ class MainSlider extends Component{
     }
 
     componentDidMount(){
+
     }
 
     onSlideClick=(id,e)=>{
@@ -170,6 +171,6 @@ const mapDispatchToProps = (dispatch) =>{
         deleteSlide : (id)=>dispatch(actions.deleteData(id)),
         editSlide : (data)=>dispatch(actions.changeData(data))
     }
-    
+
 }
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(MainSlider));

@@ -6,7 +6,9 @@ import { createStore, applyMiddleware } from 'redux';
 import { combineReducers } from 'redux'
 import {editMainSlide,editSerivces,dashBoard,logData} from './reducers/reducers'
 import {serverNotes,mailNotes,taskNotes} from './reducers/notereducers'
-
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router'
+import * as actions from './actions/actions';
 
 import Header from './containers/header';
 import Menu from './containers/menu';
@@ -31,7 +33,7 @@ const AppStore = combineReducers({
 })
 var store = createStore(AppStore,applyMiddleware(thunkMiddleware));
 //
-export default class MainAdmin extends Component{
+class MainAdmin extends Component{
 
 
     constructor(props){
@@ -57,7 +59,7 @@ export default class MainAdmin extends Component{
     }
 
     logOut=()=>{
-        this.setState({isLogged:false});
+        this.props.logOut();
     }
 
     tryToLogin=(login,pass)=>{
@@ -91,17 +93,21 @@ export default class MainAdmin extends Component{
     }
 
     render(){
-        let unsubscribe = store.subscribe(() =>{
-            let isLogginIn = store.getState();
-            this.setState({isLogged: isLogginIn.logData.isLogged});
+            let unsubscribe = store.subscribe(() =>{
+                let isLogginIn = store.getState();
+                if(isLogginIn.logData.isLogged != this.state.isLogged){
+                    console.log('change');
+                this.setState({isLogged: isLogginIn.logData.isLogged});
+                }
         }
         )
        // console.log(isLogginIn.logData);
          
         
         return(
-            <Provider store={store}>
-            {!this.state.isLogged ? (<Login login={this.tryToLogin}/>):
+            // <Provider store={store}>
+            <div>
+            {!this.props.store.isLogged ? (<Login login={this.tryToLogin}/>):
                (<div id="test">
                     <Header
                         isShowMenu={this.displayMenu} 
@@ -114,11 +120,20 @@ export default class MainAdmin extends Component{
                     />
                     <TransitionGroup>
 	                    <CSSTransition
-		                    key={this.props.location.key}
-		                    classNames="SlideIn"
-                            timeout={{ enter: 600, exit: 0 }}
-                            unmountOnExit={true}
+		                    
+                            timeout={300}
                             mountOnEnter={true}
+                            unmountOnExit={true}
+                            onExit={()=>{console.log('exited')}}
+                            appear={true}
+                            classNames={{
+                                appear: 'example-enter',
+                                appearActive: 'example-enter-active',
+                                enter: 'example-enter',
+                                enterActive: 'example-enter-active',
+                                exit: 'example-leave',
+                                exitActive: 'example-leave-active',
+                               }}
                         >
                             <Switch >
                                 <Route  exact path="/admin" component={DashBoard}/>
@@ -128,9 +143,19 @@ export default class MainAdmin extends Component{
                         </CSSTransition>
                     </TransitionGroup>
                 </div>)}
-            </Provider>
+                </div>
+            // </Provider>
 
         )
         
     }
 }
+const mapStateToProps = (state,ownProps) => {
+    return { store: state.logData }
+}
+const mapDispatchToProps =(dispatch) =>{
+    return{
+        logOut: ()=>dispatch(actions.logout())
+    }
+}
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(MainAdmin));

@@ -25,9 +25,9 @@ export default class LogUser extends Component {
         const logOverlay = (
             <Popover id="log-out" >
             <ul className="logout-item">
-                <li><a ><i className=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a ><i className="fa fa-cog"></i> Settings</a></li>
-                <li><a onClick={(e)=>{this.props.logout()}}><i className="fa fa-key"></i> Log Out</a></li>
+                <li><a ><i className=" fa fa-suitcase"></i>Профиль</a></li>
+                <li><a ><i className="fa fa-cog"></i> Настройки</a></li>
+                <li><a onClick={(e)=>{this.props.logout()}}><i className="fa fa-key"></i> Выйти</a></li>
             </ul>
             </Popover>
         )
