@@ -1,5 +1,5 @@
 import {actionString, actionStringService, actionServerNote, actionMailNote,actionTaskNote, actionDashboard,loginStrings} from  '../helpers/actionstrings';
-
+import * as call from '../api/requests';
 
 /* Slider actions */
 export function showModal(id,switcher){
@@ -148,26 +148,56 @@ export function fetchDashboardData(){
 
 /* Login actions */
 
-export function loginSuccess(){
+export function loginSuccess(res){
     console.log('imitate success');
     return {
         type: loginStrings.LOGIN_SUCCESS,
-        data:{id:1,name:'Игорь'}
+        data:{id:1,name:res.name,token:res.token}
     }
 }
 
-export function loginError(){
+export function loginError(data){
     return{
-        type: loginStrings.LOGIN_ERROR
+        type: loginStrings.LOGIN_ERROR,
+        error : data.error
     }
 }
 
-export function loginToApp(){
+export function tryToLogin(){
+    return{
+        type: loginStrings.LOGIN_ATTEMPT
+    }
+}
+
+export function loginToApp(data){
     return function(dispatch){
-        console.log('attempt login');
-        setTimeout(function(){
-            return dispatch(loginSuccess())
-        },2000)
+        //console.log('attempt login');
+        dispatch(tryToLogin());
+        call.loginAttempt(data)
+        .then(response=>response.json())
+        .then(json=>{
+            console.log('get data');
+            console.log(json);
+            // switch(json.status){
+            //     case "ok":
+            //     console.log('ok');
+            //       dispatch(loginSuccess(json));
+            //     case 'error':
+            //     console.log('error');
+            //         dispatch(loginError(json));
+            // }
+            if(json.status ==="ok"){
+                dispatch(loginSuccess(json));
+            }else if(json.status ==="error"){
+                dispatch(loginError(json));
+            }
+        })
+        .catch((err)=>{
+             dispatch(loginError(err))
+        })
+        // setTimeout(function(){
+        //     return dispatch(loginSuccess())
+        // },2000)
     }
 }
 

@@ -3,6 +3,7 @@ import { Pulse } from 'react-preloading-component';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router'
 import * as actions from '../actions/actions';
+import { PassThrough } from 'stream';
 
 class Login extends Component{
     constructor(props){
@@ -24,8 +25,12 @@ class Login extends Component{
         const currlogin = 'admin';
         const currpass = 'mihadomain';
         let login = this.admLogin.value;
-        let pass = this.admPass.value
-        this.props.tryToLogin();
+        let pass = this.admPass.value;
+        let data = {
+            login : login,
+            password : pass
+        }
+        this.props.tryToLogin(data);
         // if(login.toLowerCase() === currlogin.toLowerCase() && pass.toLowerCase() ===currpass.toLowerCase()){
         //     setTimeout(function(){
         //         this.props.login(login,pass);
@@ -47,9 +52,9 @@ class Login extends Component{
                         <h6><a href="#">Forgot Password?</a></h6> */}
                             <div className="clearfix"></div>
                     {/* <input type="submit" value={this.state.loginIn ? (<Pulse/>):"Вход"} name="login"/> */}
-                            <button type="submit" className="button-submit" name="login">{this.state.loginIn ? (<Pulse color="white"/>):("Вход")}</button>
+                            <button type="submit" className="button-submit" name="login">{this.props.store.tryToLogin ? (<Pulse color="white"/>):("Вход")}</button>
                     </form>
-                    { this.state.error &&(<p>Данные неверны!</p>)/* <p>Don't Have an Account ?<a href="registration.html">Create an account</a></p> */}
+                    { this.props.store.error &&(<p>{this.props.store.error}!</p>)/* <p>Don't Have an Account ?<a href="registration.html">Create an account</a></p> */}
             </div>
             </div>   
         )
@@ -61,7 +66,7 @@ const mapStateToProps = (state,ownProps) => {
 }
 const mapDispatchToProps = (dispatch) =>{
     return {
-        tryToLogin: ()=>dispatch(actions.loginToApp())
+        tryToLogin: (data)=>dispatch(actions.loginToApp(data))
     }
     
 }

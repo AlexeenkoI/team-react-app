@@ -57,8 +57,6 @@ export function taskNotes(state={
     count:0,
     tasks:[]
 },action){
-    console.log('in task reducer');
-    console.log(action);
     switch(action.type){
         case actionTaskNote.FETCH_DATA:
             return state
@@ -69,14 +67,12 @@ export function taskNotes(state={
         case actionTaskNote.INITIAL_FETCH:
             return state
         case actionTaskNote.FETCH_COMPLETE:
-        console.log('reducer!');
         return Object.assign({}, state, {
             isFetching: false,
             count:action.tasks.length,
             tasks: action.tasks,
         })
         default:
-        console.log('return default')
             return state;
     }
 }

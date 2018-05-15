@@ -44,7 +44,6 @@
               line-height: 100vh;
               text-align:center;
               height: 100vh;
-          
               color: white;
               font-family: -apple-system,
                   BlinkMacSystemFont,
@@ -64,6 +63,16 @@
               padding: 0;
             }
           
+            .d {
+              -webkit-animation: dots 1.5s ease-out infinite;
+              animation: dots 1.5s ease-out infinite;
+            }
+            .d-2 {
+              animation-delay: .5s;
+            }
+            .d-3 {
+              animation-delay: 1s;
+            }
             @keyframes dots {
               50% {
                 transform: translateY(-.4rem);
@@ -72,15 +81,21 @@
                 transform: translateY(0);
               }
             }
-          
-            .d {
-              animation: dots 1.5s ease-out infinite;
+            @-moz-keyframes dots {
+              50% {
+                transform: translateY(-.4rem);
+              }
+              100% {
+                transform: translateY(0);
+              }
             }
-            .d-2 {
-              animation-delay: .5s;
-            }
-            .d-3 {
-              animation-delay: 1s;
+            @-webkit-keyframes dots {
+              50% {
+                transform: translateY(-.4rem);
+              }
+              100% {
+                transform: translateY(0);
+              }
             }
             </style>
     

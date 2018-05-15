@@ -155,7 +155,8 @@ const mapStateToProps = (state,ownProps) => {
 }
 const mapDispatchToProps =(dispatch) =>{
     return{
-        logOut: ()=>dispatch(actions.logout())
+        logOut: ()=>dispatch(actions.logout()),
+        logIn : (data)=>dispatch(actions.loginToApp(data))
     }
 }
 export default withRouter(connect(mapStateToProps,mapDispatchToProps)(MainAdmin));

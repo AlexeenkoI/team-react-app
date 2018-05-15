@@ -126,19 +126,27 @@ export function dashBoard(state={
     }
 }
 export function logData(state={
-    isLogged:false
+    isLogged:false,
+    tryToLogin:false,
 },action){
     switch(action.type){
         case  loginStrings.LOGIN_ATTEMPT:
-            return state
+        return Object.assign({}, state, {
+            tryToLogin:true
+        })
         case loginStrings.LOGIN_SUCCESS:
             console.log('change to log');
             return Object.assign({}, state, {
                 isLogged:true,
+                tryToLogin:false,
                 data:action.data
             })
         case loginStrings.LOGIN_ERROR:
-            return state
+        return Object.assign({}, state, {
+            isLogged:false,
+            tryToLogin:false,
+            error: action.error
+        })
         case loginStrings.LOGOUT:
             return Object.assign({}, state, {
                 isLogged:false,
